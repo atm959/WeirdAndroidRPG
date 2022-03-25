@@ -10,6 +10,12 @@ import com.atm959.weirdandroidrpg.util.Util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapLayers;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 
@@ -21,7 +27,7 @@ import java.util.Random;
 public class Level {
     public static final int TILE_SIZE = (Gdx.graphics.getWidth() / 8);
 
-    public int scrollX, scrollY;
+    public int scrollX = 0, scrollY = 0;
     public Tile[][] tiles;
     public Item[] itemsOnGround;
 
@@ -29,19 +35,31 @@ public class Level {
     private SpriteBatch sb;
 
     public Level(){
+        TiledMap tiledMap = new TmxMapLoader().load("testmap.tmx");
+        MapLayers mapLayers =  tiledMap.getLayers();
+        TiledMapTileLayer tiledMapTileLayer = (TiledMapTileLayer) mapLayers.get(0);
+
         tiles = new Tile[64][64];
         for(int x = 0; x < 64; x++){
             for(int y = 0; y < 64; y++){
-                int t = new Random().nextInt(6);
-                tiles[x][y] = Tile.TILE_TYPES.get(t);
+                TiledMapTileLayer.Cell cell = tiledMapTileLayer.getCell(x, 64 - y);
+                if(cell != null) {
+                    TiledMapTile tile = cell.getTile();
+                    int tileID = tile.getId();
+                    tiles[x][y] = Tile.TILE_TYPES.get(tileID);
+                } else {
+                    tiles[x][y] = new AirTile();
+                }
             }
         }
         tileset = new Texture("tileset.png");
         sb = new SpriteBatch();
     }
 
-    public void Update(){
-        //scrollX++;
+    public void Update(){}
+
+    public Tile GetTile(int x, int y){
+        return tiles[x][y];
     }
 
     public void Render(){

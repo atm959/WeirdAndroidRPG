@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * Created by atm959 on 3/23/2022.
  */
 public class TextRenderer {
-    public static final float TEXTSCALE_SMALL = Gdx.graphics.getWidth() / 20;
-    public static final float TEXTSCALE_MEDIUM = Gdx.graphics.getWidth() / 16;
-    public static final float TEXTSCALE_LARGE = Gdx.graphics.getWidth() / 12;
+    public static final int TEXTSCALE_SMALL = Gdx.graphics.getWidth() / 20;
+    public static final int TEXTSCALE_MEDIUM = Gdx.graphics.getWidth() / 16;
+    public static final int TEXTSCALE_LARGE = Gdx.graphics.getWidth() / 12;
 
     SpriteBatch sb;
     Texture fontTex;
