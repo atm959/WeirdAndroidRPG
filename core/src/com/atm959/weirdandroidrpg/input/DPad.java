@@ -1,6 +1,7 @@
 package com.atm959.weirdandroidrpg.input;
 
 import com.atm959.weirdandroidrpg.level.Level;
+import com.atm959.weirdandroidrpg.savedata.Options;
 import com.atm959.weirdandroidrpg.util.Util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -21,28 +22,32 @@ public class DPad {
 
     private Texture texture;
     private SpriteBatch sb;
-    private int xPos, yPos;
-    private int size;
+    public int xPos, yPos;
+    public int size;
 
-    private int[] touchTimer;
     public boolean[] touched;
 
     public DPad(){
         texture = new Texture("dpad.png");
         sb = new SpriteBatch();
 
-        touchTimer = new int[8];
         touched = new boolean[8];
     }
 
     public void Update(){
         size = 4 * Level.TILE_SIZE;
-        xPos = (Gdx.graphics.getWidth() / 2) - (size / 2);
+        int xOffset = 0;
+        if(Options.leftHandedDPad){
+            xOffset -= (1.5f * Level.TILE_SIZE);
+        } else {
+            xOffset += (1.5f * Level.TILE_SIZE);
+        }
+        xPos = ((Gdx.graphics.getWidth() / 2) - (size / 2)) + xOffset;
         yPos = Gdx.graphics.getHeight() - (size + Level.TILE_SIZE);
 
-        if(Gdx.input.isTouched()) {
-            int relativeX = Gdx.input.getX() - xPos;
-            int relativeY = Gdx.input.getY() - yPos;
+        if(TouchInput.touched) {
+            int relativeX = TouchInput.touchX - xPos;
+            int relativeY = TouchInput.touchY - yPos;
 
             //If the touch is not inside the D-Pad area, abort
             if((relativeX < 0) || (relativeX > size) || (relativeY < 0) || (relativeY > size)) return;
@@ -66,14 +71,11 @@ public class DPad {
                 if((normalizedX >= leftX) && (normalizedX < rightX)){
                     if((normalizedY >= topX) && (normalizedY < bottomX)){
                         touched[i] = true;
-                        touchTimer[i]++;
-                        if(touchTimer[i] > 1) touched[i] = false;
                     }
                 }
             }
         } else {
             for (int i = 0; i < 8; i++) {
-                touchTimer[i] = 0;
                 touched[i] = false;
             }
         }
@@ -82,6 +84,7 @@ public class DPad {
     public void Render(){
         int size = 4 * Level.TILE_SIZE;
         sb.begin();
+        sb.setColor(1.0f, 1.0f, 1.0f, Options.dpadOpacity);
         sb.draw(texture, xPos, Util.ConvertY(yPos, size), size, size);
         sb.end();
     }
