@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Vector2;
  * Created by atm959 on 3/24/2022.
  */
 public class Player {
-    private static final float SCROLL_SPEED = 2.5f;
+    private static final float SCROLL_SPEED = 1.0f;
 
     public int xPos, yPos;
 

@@ -1,5 +1,6 @@
 package com.atm959.weirdandroidrpg;
 
+import com.atm959.weirdandroidrpg.gamestates.OptionsScreenState;
 import com.atm959.weirdandroidrpg.gamestates.StateManager;
 import com.atm959.weirdandroidrpg.gamestates.TitleState;
 import com.atm959.weirdandroidrpg.global.Global;
@@ -9,7 +10,6 @@ import com.atm959.weirdandroidrpg.savedata.Options;
 import com.atm959.weirdandroidrpg.text.TextRenderer;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 /**
@@ -18,9 +18,9 @@ import com.badlogic.gdx.utils.ScreenUtils;
 public class Game extends ApplicationAdapter {
 	@Override
 	public void create () {
+		Options.Load();
 		StateManager.InitStack();
 		StateManager.PushState(new TitleState());
-		Options.Load();
 		Global.textRenderer = new TextRenderer();
 	}
 
@@ -33,8 +33,10 @@ public class Game extends ApplicationAdapter {
 
 		Time.frameCount++;
 		Time.CalculateFPSAndDeltaTime();
-		Global.textRenderer.RenderString("FPS: " + Time.fps, 0, Gdx.graphics.getHeight() - TextRenderer.TEXTSCALE_LARGE, TextRenderer.TEXTSCALE_LARGE);
-		Global.textRenderer.RenderString("DELTA: " + Time.deltaTime, 0, Gdx.graphics.getHeight() - TextRenderer.TEXTSCALE_LARGE - TextRenderer.TEXTSCALE_MEDIUM, TextRenderer.TEXTSCALE_MEDIUM);
+		if(Options.showFPSAndDelta) {
+			Global.textRenderer.RenderString("FPS: " + Time.fps, 0, Gdx.graphics.getHeight() - TextRenderer.TEXTSCALE_LARGE, TextRenderer.TEXTSCALE_LARGE);
+			Global.textRenderer.RenderString("DELTA: " + Time.deltaTime, 0, Gdx.graphics.getHeight() - TextRenderer.TEXTSCALE_LARGE - TextRenderer.TEXTSCALE_MEDIUM, TextRenderer.TEXTSCALE_MEDIUM);
+		}
 	}
 	
 	@Override

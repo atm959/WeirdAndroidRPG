@@ -3,9 +3,11 @@ package com.atm959.weirdandroidrpg.gamestates;
 import com.atm959.weirdandroidrpg.global.Global;
 import com.atm959.weirdandroidrpg.input.CheckBox;
 import com.atm959.weirdandroidrpg.input.DPad;
+import com.atm959.weirdandroidrpg.input.Slider;
 import com.atm959.weirdandroidrpg.level.Level;
 import com.atm959.weirdandroidrpg.level.tiles.Tile;
 import com.atm959.weirdandroidrpg.player.Player;
+import com.atm959.weirdandroidrpg.savedata.Options;
 import com.atm959.weirdandroidrpg.text.TextRenderer;
 
 /**
@@ -17,8 +19,6 @@ public class InGameState extends GameState {
     private Player player;
     private DPad dPad;
 
-    private CheckBox checkBox;
-
     public InGameState(){
         Tile.InitTileTypes();
         level = new Level();
@@ -26,11 +26,6 @@ public class InGameState extends GameState {
         player.xPos = 4;
         player.yPos = 8;
         dPad = new DPad();
-
-        checkBox = new CheckBox();
-        checkBox.xPos = 2 * Level.TILE_SIZE;
-        checkBox.yPos = 2 * Level.TILE_SIZE;
-        checkBox.size = 2 * Level.TILE_SIZE;
     }
 
     @Override
@@ -38,13 +33,11 @@ public class InGameState extends GameState {
         dPad.Update();
         level.Update();
         player.Update(level, dPad);
-        checkBox.Update();
 
         level.Render();
         player.Render(level);
 
         dPad.Render();
-        checkBox.Render();
 
         Global.textRenderer.RenderString(IN_GAME_TEXT, 0, 0, TextRenderer.TEXTSCALE_LARGE);
     }
@@ -52,5 +45,7 @@ public class InGameState extends GameState {
     @Override
     public void Dispose(){
         level.Dispose();
+        player.Dispose();
+        dPad.Dispose();
     }
 }

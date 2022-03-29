@@ -37,10 +37,10 @@ public class DPad {
     public void Update(){
         size = 4 * Level.TILE_SIZE;
         int xOffset = 0;
-        if(Options.leftHandedDPad){
-            xOffset -= (1.5f * Level.TILE_SIZE);
-        } else {
+        if(Options.rightHandedDPad){
             xOffset += (1.5f * Level.TILE_SIZE);
+        } else {
+            xOffset -= (1.5f * Level.TILE_SIZE);
         }
         xPos = ((Gdx.graphics.getWidth() / 2) - (size / 2)) + xOffset;
         yPos = Gdx.graphics.getHeight() - (size + Level.TILE_SIZE);

@@ -17,7 +17,7 @@ public class TitleState extends GameState {
     @Override
     public void Run(){
         if(Gdx.input.isTouched()){
-            StateManager.PushState(new InGameState());
+            StateManager.PushState(new OptionsScreenState(true));
         }
 
         Global.textRenderer.RenderString(TAPTOSTART_TEXT, 0, 0, TextRenderer.TEXTSCALE_SMALL);
