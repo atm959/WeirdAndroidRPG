@@ -12,12 +12,12 @@ public class Sword extends Item {
     }
 
     @Override
-    public void OnPickup(){
+    public void onPickup(){
 
     }
 
     @Override
-    public void OnUse(){
+    public void onUse(){
 
     }
 }

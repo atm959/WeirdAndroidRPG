@@ -25,16 +25,17 @@ public class DPad {
     public int xPos, yPos;
     public int size;
 
+    public boolean directionIsPressed = false;
     public boolean[] touched;
 
     public DPad(){
-        texture = new Texture("dpad.png");
+        texture = new Texture("ui/dpad.png");
         sb = new SpriteBatch();
 
         touched = new boolean[8];
     }
 
-    public void Update(){
+    public void update(){
         size = 4 * Level.TILE_SIZE;
         int xOffset = 0;
         if(Options.rightHandedDPad){
@@ -71,25 +72,27 @@ public class DPad {
                 if((normalizedX >= leftX) && (normalizedX < rightX)){
                     if((normalizedY >= topX) && (normalizedY < bottomX)){
                         touched[i] = true;
+                        directionIsPressed = true;
                     }
                 }
             }
         } else {
+            directionIsPressed = false;
             for (int i = 0; i < 8; i++) {
                 touched[i] = false;
             }
         }
     }
 
-    public void Render(){
+    public void render(){
         int size = 4 * Level.TILE_SIZE;
         sb.begin();
         sb.setColor(1.0f, 1.0f, 1.0f, Options.dpadOpacity);
-        sb.draw(texture, xPos, Util.ConvertY(yPos, size), size, size);
+        sb.draw(texture, xPos, Util.convertY(yPos, size), size, size);
         sb.end();
     }
 
-    public void Dispose(){
+    public void dispose(){
         texture.dispose();
         sb.dispose();
     }

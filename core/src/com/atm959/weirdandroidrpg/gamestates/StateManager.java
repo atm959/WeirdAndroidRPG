@@ -7,45 +7,32 @@ import java.util.ArrayList;
  */
 public class StateManager {
     public static ArrayList<GameState> stateStack;
-    public static boolean deleteCurrentState = false;
 
-    public static void InitStack(){
+    public static void initStack(){
         stateStack = new ArrayList<GameState>();
     }
 
-    public static void PushState(GameState gameState){
+    public static void pushState(GameState gameState){
         stateStack.add(gameState);
     }
 
-    public static void PopState(){
-        stateStack.get(stateStack.size() - 1).Dispose();
+    public static void popState(){
+        stateStack.get(stateStack.size() - 1).dispose();
         stateStack.remove(stateStack.size() - 1);
     }
 
-    public static GameState GetCurrentState(){
+    public static GameState getCurrentState(){
         return stateStack.get(stateStack.size() - 1);
     }
 
-    public static void RunCurrentState(){
-        if(deleteCurrentState){
-            deleteCurrentState = false;
-            PopState();
-        }
-        stateStack.get(stateStack.size() - 1).Run();
+    public static void runCurrentState(){
+        stateStack.get(stateStack.size() - 1).run();
     }
 
-    public static void DisposeAll(){
+    public static void disposeAll(){
         for(int i = stateStack.size() - 1; i >= 0; i--){
-            stateStack.get(i).Dispose();
+            stateStack.get(i).dispose();
             stateStack.remove(i);
         }
-    }
-
-    public static void MarkDeleteCurrState(){
-        deleteCurrentState = true;
-    }
-
-    public static void CancelDeleteCurrState(){
-        deleteCurrentState = false;
     }
 }

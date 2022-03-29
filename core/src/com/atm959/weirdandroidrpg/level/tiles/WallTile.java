@@ -8,4 +8,12 @@ public class WallTile extends Tile {
         this.atlasID = 1;
         this.isSolid = true;
     }
+
+    public WallTile(WallTile tile){
+        super(tile);
+    }
+    @Override
+    public WallTile copy(){
+        return new WallTile(this);
+    }
 }

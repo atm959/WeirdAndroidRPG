@@ -8,4 +8,12 @@ public class DoorTile extends Tile {
         this.atlasID = 2;
         this.isSolid = true;
     }
+
+    public DoorTile(DoorTile tile){
+        super(tile);
+    }
+    @Override
+    public DoorTile copy(){
+        return new DoorTile(this);
+    }
 }

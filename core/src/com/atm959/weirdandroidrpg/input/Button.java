@@ -16,11 +16,11 @@ public class Button {
     private SpriteBatch sb;
 
     public Button(){
-        texture = new Texture("button.png");
+        texture = new Texture("ui/button.png");
         sb = new SpriteBatch();
     }
 
-    public void Update(){
+    public void update(){
         if(TouchInput.touched){
             int relativeX = TouchInput.touchX - xPos;
             int relativeY = TouchInput.touchY - yPos;
@@ -33,13 +33,13 @@ public class Button {
         }
     }
 
-    public void Render(){
+    public void render(){
         sb.begin();
-        sb.draw(texture, xPos, Util.ConvertY(yPos, height), width, height);
+        sb.draw(texture, xPos, Util.convertY(yPos, height), width, height);
         sb.end();
     }
 
-    public void Dispose(){
+    public void dispose(){
         texture.dispose();
         sb.dispose();
     }

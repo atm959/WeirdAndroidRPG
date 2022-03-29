@@ -16,11 +16,11 @@ public class Slider {
     private SpriteBatch sb;
 
     public Slider(){
-        texture = new Texture("slider.png");
+        texture = new Texture("ui/slider.png");
         sb = new SpriteBatch();
     }
 
-    public void Update(){
+    public void update(){
         if(TouchInput.held){
             int relativeX = TouchInput.touchX - xPos;
             int relativeY = TouchInput.touchY - yPos;
@@ -35,16 +35,16 @@ public class Slider {
         }
     }
 
-    public void Render(){
+    public void render(){
         sb.begin();
-        sb.draw(texture, xPos, Util.ConvertY(yPos, height), width, height, 0, 0, 32, 16, false, false);
+        sb.draw(texture, xPos, Util.convertY(yPos, height), width, height, 0, 0, 32, 16, false, false);
 
         int sliderPieceX = xPos + (int)(value * (width - ((width / 32) * 4)));
-        sb.draw(texture, sliderPieceX, Util.ConvertY(yPos, height), width / 8.0f, height, 0, 16, 8, 16, false, false);
+        sb.draw(texture, sliderPieceX, Util.convertY(yPos, height), width / 8.0f, height, 0, 16, 8, 16, false, false);
         sb.end();
     }
 
-    public void Dispose(){
+    public void dispose(){
         texture.dispose();
         sb.dispose();
     }

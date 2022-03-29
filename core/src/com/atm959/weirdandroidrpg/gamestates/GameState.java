@@ -5,6 +5,6 @@ package com.atm959.weirdandroidrpg.gamestates;
  */
 public class GameState {
     public GameState(){}
-    public void Run(){}
-    public void Dispose(){}
+    public void run(){}
+    public void dispose(){}
 }

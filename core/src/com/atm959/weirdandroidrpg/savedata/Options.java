@@ -9,8 +9,8 @@ import com.badlogic.gdx.Preferences;
 public class Options {
     private static final String OPTIONS_PREF_NAME = "ATM959_WEIRD_RPG_GAME_OPTIONS";
 
-    private static final String DEBUG_MODE_ENABLED_KEY = "DEBUG_MODE_ENABLED";
-    public static boolean debugModeEnabled;
+    private static final String OPTIONS_HAVE_BEEN_SET_KEY = "OPTIONS_HAVE_BEEN_SET";
+    public static boolean optionsHaveBeenSet;
 
     private static final String RIGHT_HANDED_DPAD_KEY = "LEFT_HANDED_DPAD";
     public static boolean rightHandedDPad;
@@ -21,17 +21,17 @@ public class Options {
     private static final String SHOW_FPS_AND_DELTA_KEY = "SHOW_FPS_AND_DELTA";
     public static boolean showFPSAndDelta;
 
-    public static void Load(){
+    public static void load(){
         Preferences pref = Gdx.app.getPreferences(OPTIONS_PREF_NAME);
-        debugModeEnabled = pref.getBoolean(DEBUG_MODE_ENABLED_KEY, false);
+        optionsHaveBeenSet = pref.getBoolean(OPTIONS_HAVE_BEEN_SET_KEY, false);
         rightHandedDPad = pref.getBoolean(RIGHT_HANDED_DPAD_KEY, true);
         dpadOpacity = pref.getFloat(DPAD_OPACITY_KEY, 0.75f);
         showFPSAndDelta = pref.getBoolean(SHOW_FPS_AND_DELTA_KEY, true);
     }
 
-    public static void Save(){
+    public static void save(){
         Preferences pref = Gdx.app.getPreferences(OPTIONS_PREF_NAME);
-        pref.putBoolean(DEBUG_MODE_ENABLED_KEY, debugModeEnabled);
+        pref.putBoolean(OPTIONS_HAVE_BEEN_SET_KEY, optionsHaveBeenSet);
         pref.putBoolean(RIGHT_HANDED_DPAD_KEY, rightHandedDPad);
         pref.putFloat(DPAD_OPACITY_KEY, dpadOpacity);
         pref.putBoolean(SHOW_FPS_AND_DELTA_KEY, showFPSAndDelta);

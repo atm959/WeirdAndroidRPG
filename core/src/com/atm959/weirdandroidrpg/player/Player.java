@@ -21,34 +21,51 @@ public class Player {
     private SpriteBatch sb;
 
     public Player(){
-        texture = new Texture("player.png");
+        texture = new Texture("player/player.png");
         sb = new SpriteBatch();
     }
 
-    public void Update(Level level, DPad dpad){
+    public void takeStep(Level level, DPad dpad){
         final Vector2[] dpadDirections = {
-            new Vector2(0, -1),
-            new Vector2(0, 1),
-            new Vector2(-1, 0),
-            new Vector2(1, 0),
-            new Vector2(-1, -1),
-            new Vector2(1, -1),
-            new Vector2(-1, 1),
-            new Vector2(1, 1)
+                new Vector2(0, -1),
+                new Vector2(0, 1),
+                new Vector2(-1, 0),
+                new Vector2(1, 0),
+                new Vector2(-1, -1),
+                new Vector2(1, -1),
+                new Vector2(-1, 1),
+                new Vector2(1, 1)
         };
         int oldX = xPos;
         int oldY = yPos;
+        int velX = 0;
+        int velY = 0;
         for(int i = 0; i < 8; i++){
             if(dpad.touched[i]){
-                xPos += dpadDirections[i].x;
-                yPos += dpadDirections[i].y;
+                velX = (int)dpadDirections[i].x;
+                velY = (int)dpadDirections[i].y;
             }
         }
-        if(level.GetTile(xPos, yPos).isSolid){
+        if(level.getTile(xPos + velX, yPos).isSolid){
+            velX = 0;
+        }
+        if(level.getTile(xPos, yPos + velY).isSolid){
+            velY = 0;
+        }
+        xPos += velX;
+        yPos += velY;
+        if(level.getTile(xPos, yPos).isSolid){
             xPos = oldX;
             yPos = oldY;
+        } else {
+            Gdx.app.log("PLAYER", "TILE STUFF");
+            level.getTile(oldX, oldY).onPlayerWalkOutOf();
+            level.getTile(xPos, yPos).onPlayerWalkInto();
+            Gdx.app.log("WALKED_INTO_TILE", level.getTile(xPos, yPos).toString());
         }
+    }
 
+    public void update(Level level){
         int onScreenX = (xPos * Level.TILE_SIZE) - level.scrollX;
         int onScreenY = (yPos * Level.TILE_SIZE) - level.scrollY;
         int numTilesY = Gdx.graphics.getHeight() / Level.TILE_SIZE;
@@ -59,18 +76,13 @@ public class Player {
         if((onScreenY + Level.TILE_SIZE) > (((numTilesY / 2) + 2) * Level.TILE_SIZE)) level.scrollY += (SCROLL_SPEED * Time.deltaTime);
     }
 
-    public void TakeStep(int dirX, int dirY){
-        xPos += dirX;
-        yPos += dirY;
-    }
-
-    public void Render(Level level){
+    public void render(Level level){
         sb.begin();
-        sb.draw(texture, (xPos * Level.TILE_SIZE) - level.scrollX, Util.ConvertY((yPos * Level.TILE_SIZE) - level.scrollY, Level.TILE_SIZE), Level.TILE_SIZE, Level.TILE_SIZE);
+        sb.draw(texture, (xPos * Level.TILE_SIZE) - level.scrollX, Util.convertY((yPos * Level.TILE_SIZE) - level.scrollY, Level.TILE_SIZE), Level.TILE_SIZE, Level.TILE_SIZE);
         sb.end();
     }
 
-    public void Dispose(){
+    public void dispose(){
         texture.dispose();
         sb.dispose();
     }

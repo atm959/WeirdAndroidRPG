@@ -17,7 +17,7 @@ public class Time {
     public static long lastTimeForDeltaTime;
     public static boolean isFirstFrameForDeltaTime = true;
 
-    public static void CalculateFPSAndDeltaTime(){
+    public static void calculateFPSAndDeltaTime(){
         if(isFirstFrameForFPS){
             isFirstFrameForFPS = false;
             currentTimeForFPS = System.currentTimeMillis();

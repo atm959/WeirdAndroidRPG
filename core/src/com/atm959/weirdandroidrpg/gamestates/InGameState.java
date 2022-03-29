@@ -1,13 +1,11 @@
 package com.atm959.weirdandroidrpg.gamestates;
 
+import com.atm959.weirdandroidrpg.audio.BGM;
 import com.atm959.weirdandroidrpg.global.Global;
-import com.atm959.weirdandroidrpg.input.CheckBox;
 import com.atm959.weirdandroidrpg.input.DPad;
-import com.atm959.weirdandroidrpg.input.Slider;
 import com.atm959.weirdandroidrpg.level.Level;
 import com.atm959.weirdandroidrpg.level.tiles.Tile;
 import com.atm959.weirdandroidrpg.player.Player;
-import com.atm959.weirdandroidrpg.savedata.Options;
 import com.atm959.weirdandroidrpg.text.TextRenderer;
 
 /**
@@ -20,6 +18,8 @@ public class InGameState extends GameState {
     private DPad dPad;
 
     public InGameState(){
+        BGM.playSong(1);
+
         Tile.InitTileTypes();
         level = new Level();
         player = new Player();
@@ -29,23 +29,24 @@ public class InGameState extends GameState {
     }
 
     @Override
-    public void Run(){
-        dPad.Update();
-        level.Update();
-        player.Update(level, dPad);
+    public void run(){
+        dPad.update();
+        level.update();
+        if(dPad.directionIsPressed) player.takeStep(level, dPad);
+        player.update(level);
 
-        level.Render();
-        player.Render(level);
+        level.render();
+        player.render(level);
 
-        dPad.Render();
+        dPad.render();
 
-        Global.textRenderer.RenderString(IN_GAME_TEXT, 0, 0, TextRenderer.TEXTSCALE_LARGE);
+        Global.textRenderer.renderString(IN_GAME_TEXT, 0, 0, TextRenderer.TEXTSCALE_LARGE);
     }
 
     @Override
-    public void Dispose(){
-        level.Dispose();
-        player.Dispose();
-        dPad.Dispose();
+    public void dispose(){
+        level.dispose();
+        player.dispose();
+        dPad.dispose();
     }
 }

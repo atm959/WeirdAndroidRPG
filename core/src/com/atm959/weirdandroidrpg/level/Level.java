@@ -1,25 +1,17 @@
 package com.atm959.weirdandroidrpg.level;
 
-import com.atm959.weirdandroidrpg.global.Global;
 import com.atm959.weirdandroidrpg.items.Item;
 import com.atm959.weirdandroidrpg.level.tiles.AirTile;
-import com.atm959.weirdandroidrpg.level.tiles.FloorTile;
 import com.atm959.weirdandroidrpg.level.tiles.Tile;
-import com.atm959.weirdandroidrpg.level.tiles.WallTile;
 import com.atm959.weirdandroidrpg.util.Util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.math.Vector3;
-
-import java.util.Random;
 
 /**
  * Created by atm959 on 3/23/2022.
@@ -35,7 +27,7 @@ public class Level {
     private SpriteBatch sb;
 
     public Level(){
-        TiledMap tiledMap = new TmxMapLoader().load("testmap.tmx");
+        TiledMap tiledMap = new TmxMapLoader().load("level/testmap.tmx");
         MapLayers mapLayers =  tiledMap.getLayers();
         TiledMapTileLayer tiledMapTileLayer = (TiledMapTileLayer) mapLayers.get(0);
 
@@ -46,23 +38,23 @@ public class Level {
                 if(cell != null) {
                     TiledMapTile tile = cell.getTile();
                     int tileID = tile.getId();
-                    tiles[x][y] = Tile.TILE_TYPES.get(tileID);
+                    tiles[x][y] = Tile.TILE_TYPES.get(tileID).copy();
                 } else {
                     tiles[x][y] = new AirTile();
                 }
             }
         }
-        tileset = new Texture("tileset.png");
+        tileset = new Texture("level/tileset.png");
         sb = new SpriteBatch();
     }
 
-    public void Update(){}
+    public void update(){}
 
-    public Tile GetTile(int x, int y){
+    public Tile getTile(int x, int y){
         return tiles[x][y];
     }
 
-    public void Render(){
+    public void render(){
         sb.begin();
         for(int x = 0; x < 64; x++){
             for(int y = 0; y < 64; y++){
@@ -70,14 +62,14 @@ public class Level {
                 if(tile.isRendered) {
                     int srcX = (tile.atlasID % 16) * 16;
                     int srcY = (tile.atlasID / 16) * 16;
-                    sb.draw(tileset, (x * TILE_SIZE) - scrollX, Util.ConvertY((y * TILE_SIZE) - scrollY, TILE_SIZE), TILE_SIZE, TILE_SIZE, srcX, srcY, 16, 16, false, false);
+                    sb.draw(tileset, (x * TILE_SIZE) - scrollX, Util.convertY((y * TILE_SIZE) - scrollY, TILE_SIZE), TILE_SIZE, TILE_SIZE, srcX, srcY, 16, 16, false, false);
                 }
             }
         }
         sb.end();
     }
 
-    public void Dispose(){
+    public void dispose(){
         tileset.dispose();
         sb.dispose();
     }

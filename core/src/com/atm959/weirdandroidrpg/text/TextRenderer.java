@@ -18,20 +18,20 @@ public class TextRenderer {
 
     public TextRenderer(){
         this.sb = new SpriteBatch();
-        this.fontTex = new Texture("font.png");
+        this.fontTex = new Texture("ui/font.png");
     }
 
-    public void RenderString(String s, float x, float y, float scale){
+    public void renderString(String s, float x, float y, float scale){
         this.sb.begin();
         for(int i = 0; i < s.length(); i++){
             float xPos = (i * (int)scale) + x;
             int c = s.charAt(i) - 32;
-            this.sb.draw(this.fontTex, xPos, Util.ConvertY((int)y, (int)scale), scale, scale, (c % 16) * 10, (c / 16) * 10, 10, 10, false, false);
+            this.sb.draw(this.fontTex, xPos, Util.convertY((int)y, (int)scale), scale, scale, (c % 16) * 10, (c / 16) * 10, 10, 10, false, false);
         }
         this.sb.end();
     }
 
-    public void Dispose(){
+    public void dispose(){
         this.sb.dispose();
         this.fontTex.dispose();
     }

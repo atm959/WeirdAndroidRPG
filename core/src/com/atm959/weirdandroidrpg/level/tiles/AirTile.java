@@ -9,4 +9,12 @@ public class AirTile extends Tile {
         this.isSolid = true;
         this.isRendered = false;
     }
+
+    public AirTile(AirTile tile){
+        super(tile);
+    }
+    @Override
+    public AirTile copy(){
+        return new AirTile(this);
+    }
 }

@@ -1,7 +1,6 @@
 package com.atm959.weirdandroidrpg.input;
 
 import com.atm959.weirdandroidrpg.util.Util;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -17,11 +16,11 @@ public class CheckBox {
     private SpriteBatch sb;
 
     public CheckBox(){
-        texture = new Texture("checkbox.png");
+        texture = new Texture("ui/checkbox.png");
         sb = new SpriteBatch();
     }
 
-    public void Update(){
+    public void update(){
         if(TouchInput.touched){
             int relativeX = TouchInput.touchX - xPos;
             int relativeY = TouchInput.touchY - yPos;
@@ -32,18 +31,18 @@ public class CheckBox {
         }
     }
 
-    public void Render(){
+    public void render(){
         int srcX = 0;
         if(isChecked){
             srcX += 16;
         }
 
         sb.begin();
-        sb.draw(texture, xPos, Util.ConvertY(yPos, size), size, size, srcX, 0, 16, 16, false, false);
+        sb.draw(texture, xPos, Util.convertY(yPos, size), size, size, srcX, 0, 16, 16, false, false);
         sb.end();
     }
 
-    public void Dispose(){
+    public void dispose(){
         texture.dispose();
         sb.dispose();
     }

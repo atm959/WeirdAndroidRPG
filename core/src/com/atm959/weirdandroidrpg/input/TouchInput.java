@@ -13,7 +13,7 @@ public class TouchInput {
     public static int touchX = 0;
     public static int touchY = 0;
 
-    public static void Update(){
+    public static void update(){
         if(released) released = false;
 
         if(Gdx.input.isTouched()){

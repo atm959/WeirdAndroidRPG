@@ -13,8 +13,8 @@ public class Item {
     public float durability = 0.0f;
 
     public Item(){}
-    public void Update(){}
-    public void Dispose(){}
-    public void OnPickup(){}
-    public void OnUse(){}
+    public void update(){}
+    public void dispose(){}
+    public void onPickup(){}
+    public void onUse(){}
 }

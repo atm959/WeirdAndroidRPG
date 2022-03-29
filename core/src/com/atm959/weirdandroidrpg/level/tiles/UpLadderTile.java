@@ -7,4 +7,12 @@ public class UpLadderTile extends Tile {
     public UpLadderTile(){
         this.atlasID = 4;
     }
+
+    public UpLadderTile(UpLadderTile tile){
+        super(tile);
+    }
+    @Override
+    public UpLadderTile copy(){
+        return new UpLadderTile(this);
+    }
 }

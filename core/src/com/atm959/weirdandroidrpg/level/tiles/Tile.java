@@ -1,11 +1,14 @@
 package com.atm959.weirdandroidrpg.level.tiles;
 
+import com.badlogic.gdx.Gdx;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by atm959 on 3/24/2022.
  */
-public class Tile {
+public class Tile implements Serializable {
     public static ArrayList<Tile> TILE_TYPES;
     public static void InitTileTypes(){
         TILE_TYPES = new ArrayList<Tile>();
@@ -22,7 +25,17 @@ public class Tile {
     public boolean isRendered = true;
 
     public Tile(){}
-    public void Update(){}
-    public void Dispose(){}
-    public void OnPlayerWalkInside(){}
+    public void update(){}
+    public void dispose(){}
+    public void onPlayerWalkInto(){}
+    public void onPlayerWalkOutOf(){}
+
+    public Tile(Tile tile){
+        this.atlasID = tile.atlasID;
+        this.isSolid = tile.isSolid;
+        this.isRendered = tile.isRendered;
+    }
+    public Tile copy(){
+        return new Tile(this);
+    }
 }
