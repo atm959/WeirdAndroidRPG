@@ -3,6 +3,7 @@ package com.atm959.weirdandroidrpg.player;
 import com.atm959.weirdandroidrpg.global.Time;
 import com.atm959.weirdandroidrpg.input.DPad;
 import com.atm959.weirdandroidrpg.level.Level;
+import com.atm959.weirdandroidrpg.level.tiles.AirTile;
 import com.atm959.weirdandroidrpg.util.Util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -40,28 +41,36 @@ public class Player {
         int oldY = yPos;
         int velX = 0;
         int velY = 0;
+        boolean playerMovedX = false;
+        boolean playerMovedY = false;
         for(int i = 0; i < 8; i++){
             if(dpad.touched[i]){
                 velX = (int)dpadDirections[i].x;
                 velY = (int)dpadDirections[i].y;
+                if(velX != 0) playerMovedX = true;
+                if(velY != 0) playerMovedY = true;
             }
         }
         if(level.getTile(xPos + velX, yPos).isSolid){
             velX = 0;
+            playerMovedX = false;
         }
         if(level.getTile(xPos, yPos + velY).isSolid){
             velY = 0;
+            playerMovedY = false;
         }
         xPos += velX;
         yPos += velY;
         if(level.getTile(xPos, yPos).isSolid){
             xPos = oldX;
             yPos = oldY;
-        } else {
-            Gdx.app.log("PLAYER", "TILE STUFF");
+            playerMovedX = false;
+            playerMovedY = false;
+        }
+
+        if(playerMovedX || playerMovedY) {
             level.getTile(oldX, oldY).onPlayerWalkOutOf();
             level.getTile(xPos, yPos).onPlayerWalkInto();
-            Gdx.app.log("WALKED_INTO_TILE", level.getTile(xPos, yPos).toString());
         }
     }
 

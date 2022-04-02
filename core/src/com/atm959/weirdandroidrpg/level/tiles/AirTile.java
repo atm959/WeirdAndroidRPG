@@ -5,7 +5,6 @@ package com.atm959.weirdandroidrpg.level.tiles;
  */
 public class AirTile extends Tile {
     public AirTile(){
-        this.atlasID = 0;
         this.isSolid = true;
         this.isRendered = false;
     }

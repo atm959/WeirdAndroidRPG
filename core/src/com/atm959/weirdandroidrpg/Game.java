@@ -5,6 +5,8 @@ import com.atm959.weirdandroidrpg.gamestates.TitleState;
 import com.atm959.weirdandroidrpg.global.Global;
 import com.atm959.weirdandroidrpg.global.Time;
 import com.atm959.weirdandroidrpg.input.TouchInput;
+import com.atm959.weirdandroidrpg.items.items.Item;
+import com.atm959.weirdandroidrpg.level.tiles.Tile;
 import com.atm959.weirdandroidrpg.savedata.Options;
 import com.atm959.weirdandroidrpg.text.TextRenderer;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -18,6 +20,8 @@ public class Game extends ApplicationAdapter {
 	@Override
 	public void create () {
 		Options.load();
+		Tile.InitTileTypes();
+		Item.InitItemTypes();
 		StateManager.initStack();
 		StateManager.pushState(new TitleState());
 		Global.textRenderer = new TextRenderer();
@@ -36,6 +40,7 @@ public class Game extends ApplicationAdapter {
 			Global.textRenderer.renderString("FPS: " + Time.fps, 0, Gdx.graphics.getHeight() - TextRenderer.TEXTSCALE_LARGE, TextRenderer.TEXTSCALE_LARGE);
 			Global.textRenderer.renderString("DELTA: " + Time.deltaTime, 0, Gdx.graphics.getHeight() - TextRenderer.TEXTSCALE_LARGE - TextRenderer.TEXTSCALE_MEDIUM, TextRenderer.TEXTSCALE_MEDIUM);
 		}
+		Global.textRenderer.renderString("STATES: " + StateManager.stateStack.size(), 0, Gdx.graphics.getHeight() - TextRenderer.TEXTSCALE_LARGE - TextRenderer.TEXTSCALE_MEDIUM - TextRenderer.TEXTSCALE_LARGE, TextRenderer.TEXTSCALE_LARGE);
 	}
 	
 	@Override

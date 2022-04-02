@@ -1,8 +1,6 @@
 package com.atm959.weirdandroidrpg.player;
 
-import com.atm959.weirdandroidrpg.items.Item;
-
-import java.util.ArrayList;
+import com.atm959.weirdandroidrpg.items.items.Item;
 
 /**
  * Created by atm959 on 3/24/2022.

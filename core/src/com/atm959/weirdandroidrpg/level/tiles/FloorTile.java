@@ -10,12 +10,6 @@ public class FloorTile extends Tile {
         this.atlasID = 0;
     }
 
-    @Override
-    public void onPlayerWalkInto(){
-        this.atlasID++;
-        Gdx.app.log("TILE", "OnPlayerWalkInto() " + this.atlasID);
-    }
-
     public FloorTile(FloorTile tile){
         super(tile);
     }

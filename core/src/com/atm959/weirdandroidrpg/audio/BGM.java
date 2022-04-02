@@ -8,8 +8,8 @@ import com.badlogic.gdx.audio.Music;
  */
 public class BGM {
     public static final String[] songFiles = {
-        "title/bgm.ogg",
-        "level/bgm.mp4"
+        "title/bgm.mp3",
+        "level/bgm.mp3"
     };
     public static Music music;
 

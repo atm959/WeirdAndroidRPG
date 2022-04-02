@@ -20,6 +20,11 @@ public class Button {
         sb = new SpriteBatch();
     }
 
+    public Button(String texPath){
+        texture = new Texture(texPath);
+        sb = new SpriteBatch();
+    }
+
     public void update(){
         if(TouchInput.touched){
             int relativeX = TouchInput.touchX - xPos;

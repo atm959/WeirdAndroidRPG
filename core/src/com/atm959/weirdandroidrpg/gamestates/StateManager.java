@@ -9,7 +9,7 @@ public class StateManager {
     public static ArrayList<GameState> stateStack;
 
     public static void initStack(){
-        stateStack = new ArrayList<GameState>();
+        stateStack = new ArrayList<>();
     }
 
     public static void pushState(GameState gameState){
@@ -19,6 +19,11 @@ public class StateManager {
     public static void popState(){
         stateStack.get(stateStack.size() - 1).dispose();
         stateStack.remove(stateStack.size() - 1);
+    }
+
+    public static void replaceCurrentState(GameState gameState){
+        popState();
+        pushState(gameState);
     }
 
     public static GameState getCurrentState(){
