@@ -36,7 +36,7 @@ public class Level {
         tiles = new Tile[64][64];
         for(int x = 0; x < 64; x++){
             for(int y = 0; y < 64; y++){
-                TiledMapTileLayer.Cell cell = tiledMapTileLayer.getCell(x, 64 - y);
+                TiledMapTileLayer.Cell cell = tiledMapTileLayer.getCell(x, 63 - y);
                 if(cell != null) {
                     TiledMapTile tile = cell.getTile();
                     int tileID = tile.getId();

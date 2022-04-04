@@ -2,8 +2,7 @@ package com.atm959.weirdandroidrpg;
 
 import com.atm959.weirdandroidrpg.gamestates.StateManager;
 import com.atm959.weirdandroidrpg.gamestates.TitleState;
-import com.atm959.weirdandroidrpg.global.Global;
-import com.atm959.weirdandroidrpg.global.Time;
+import com.atm959.weirdandroidrpg.time.Time;
 import com.atm959.weirdandroidrpg.input.TouchInput;
 import com.atm959.weirdandroidrpg.items.items.Item;
 import com.atm959.weirdandroidrpg.level.tiles.Tile;
@@ -24,7 +23,7 @@ public class Game extends ApplicationAdapter {
 		Item.InitItemTypes();
 		StateManager.initStack();
 		StateManager.pushState(new TitleState());
-		Global.textRenderer = new TextRenderer();
+		TextRenderer.init();
 	}
 
 	@Override
@@ -36,16 +35,16 @@ public class Game extends ApplicationAdapter {
 
 		Time.frameCount++;
 		Time.calculateFPSAndDeltaTime();
-		if(Options.showFPSAndDelta) {
-			Global.textRenderer.renderString("FPS: " + Time.fps, 0, Gdx.graphics.getHeight() - TextRenderer.TEXTSCALE_LARGE, TextRenderer.TEXTSCALE_LARGE);
-			Global.textRenderer.renderString("DELTA: " + Time.deltaTime, 0, Gdx.graphics.getHeight() - TextRenderer.TEXTSCALE_LARGE - TextRenderer.TEXTSCALE_MEDIUM, TextRenderer.TEXTSCALE_MEDIUM);
+		if (Options.showFPSAndDelta) {
+			TextRenderer.renderString("FPS: " + Time.fps, 0, Gdx.graphics.getHeight() - TextRenderer.TEXTSCALE_LARGE, TextRenderer.TEXTSCALE_LARGE);
+			TextRenderer.renderString("DELTA: " + Time.deltaTime, 0, Gdx.graphics.getHeight() - TextRenderer.TEXTSCALE_LARGE - TextRenderer.TEXTSCALE_MEDIUM, TextRenderer.TEXTSCALE_MEDIUM);
+			TextRenderer.renderString("STATES: " + StateManager.stateStack.size(), 0, Gdx.graphics.getHeight() - TextRenderer.TEXTSCALE_LARGE - TextRenderer.TEXTSCALE_MEDIUM - TextRenderer.TEXTSCALE_LARGE, TextRenderer.TEXTSCALE_LARGE);
 		}
-		Global.textRenderer.renderString("STATES: " + StateManager.stateStack.size(), 0, Gdx.graphics.getHeight() - TextRenderer.TEXTSCALE_LARGE - TextRenderer.TEXTSCALE_MEDIUM - TextRenderer.TEXTSCALE_LARGE, TextRenderer.TEXTSCALE_LARGE);
 	}
 	
 	@Override
 	public void dispose () {
-		Global.textRenderer.dispose();
+		TextRenderer.dispose();
 		StateManager.disposeAll();
 	}
 }

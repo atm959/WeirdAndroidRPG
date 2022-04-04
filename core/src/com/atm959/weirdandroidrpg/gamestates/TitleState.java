@@ -1,8 +1,7 @@
 package com.atm959.weirdandroidrpg.gamestates;
 
 import com.atm959.weirdandroidrpg.audio.BGM;
-import com.atm959.weirdandroidrpg.global.Global;
-import com.atm959.weirdandroidrpg.global.Time;
+import com.atm959.weirdandroidrpg.time.Time;
 import com.atm959.weirdandroidrpg.input.Button;
 import com.atm959.weirdandroidrpg.level.Level;
 import com.atm959.weirdandroidrpg.savedata.Options;
@@ -89,12 +88,12 @@ public class TitleState extends GameState {
         optionsButton.render();
         creditsButton.render();
 
-        Global.textRenderer.renderString(TITLESCREEN_TITLE, 0, Gdx.graphics.getHeight() / 2, TextRenderer.TEXTSCALE_LARGE);
-        Global.textRenderer.renderString(TITLESCREEN_AUTHOR, 0, (Gdx.graphics.getHeight() / 2) + TextRenderer.TEXTSCALE_LARGE, TextRenderer.TEXTSCALE_MEDIUM);
+        TextRenderer.renderString(TITLESCREEN_TITLE, 0, Gdx.graphics.getHeight() / 2, TextRenderer.TEXTSCALE_LARGE);
+        TextRenderer.renderString(TITLESCREEN_AUTHOR, 0, (Gdx.graphics.getHeight() / 2) + TextRenderer.TEXTSCALE_LARGE, TextRenderer.TEXTSCALE_MEDIUM);
 
-        Global.textRenderer.renderString(PLAY_TEXT, startButton.xPos + (startButton.width / 2) - ((PLAY_TEXT.length() * TextRenderer.TEXTSCALE_LARGE) / 2), (int)(startButton.yPos + 0.35f * Level.TILE_SIZE), TextRenderer.TEXTSCALE_LARGE);
-        Global.textRenderer.renderString(OPTIONS_TEXT, optionsButton.xPos + (optionsButton.width / 2) - ((OPTIONS_TEXT.length() * TextRenderer.TEXTSCALE_LARGE) / 2), (int)(optionsButton.yPos + 0.35f * Level.TILE_SIZE), TextRenderer.TEXTSCALE_LARGE);
-        Global.textRenderer.renderString(CREDITS_TEXT, creditsButton.xPos + (creditsButton.width / 2) - ((CREDITS_TEXT.length() * TextRenderer.TEXTSCALE_LARGE) / 2), (int)(creditsButton.yPos + 0.35f * Level.TILE_SIZE), TextRenderer.TEXTSCALE_LARGE);
+        TextRenderer.renderString(PLAY_TEXT, startButton.xPos + (startButton.width / 2) - ((PLAY_TEXT.length() * TextRenderer.TEXTSCALE_LARGE) / 2), (int)(startButton.yPos + 0.35f * Level.TILE_SIZE), TextRenderer.TEXTSCALE_LARGE);
+        TextRenderer.renderString(OPTIONS_TEXT, optionsButton.xPos + (optionsButton.width / 2) - ((OPTIONS_TEXT.length() * TextRenderer.TEXTSCALE_LARGE) / 2), (int)(optionsButton.yPos + 0.35f * Level.TILE_SIZE), TextRenderer.TEXTSCALE_LARGE);
+        TextRenderer.renderString(CREDITS_TEXT, creditsButton.xPos + (creditsButton.width / 2) - ((CREDITS_TEXT.length() * TextRenderer.TEXTSCALE_LARGE) / 2), (int)(creditsButton.yPos + 0.35f * Level.TILE_SIZE), TextRenderer.TEXTSCALE_LARGE);
     }
 
     @Override

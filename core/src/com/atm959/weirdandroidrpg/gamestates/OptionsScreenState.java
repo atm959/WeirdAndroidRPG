@@ -1,7 +1,6 @@
 package com.atm959.weirdandroidrpg.gamestates;
 
-import com.atm959.weirdandroidrpg.global.Global;
-import com.atm959.weirdandroidrpg.global.Time;
+import com.atm959.weirdandroidrpg.time.Time;
 import com.atm959.weirdandroidrpg.input.Button;
 import com.atm959.weirdandroidrpg.input.CheckBox;
 import com.atm959.weirdandroidrpg.input.Slider;
@@ -97,12 +96,12 @@ public class OptionsScreenState extends GameState {
         }
         bgSB.end();
 
-        Global.textRenderer.renderString(OPTIONS_STRING, (int)(0.5f * Level.TILE_SIZE), 0, Level.TILE_SIZE);
-        Global.textRenderer.renderString(LEFT_HANDED_STRING, rightHandedCheckbox.xPos + rightHandedCheckbox.size + (int)(0.5f * Level.TILE_SIZE), rightHandedCheckbox.yPos + (int)(0.25 * Level.TILE_SIZE), TextRenderer.TEXTSCALE_SMALL);
-        Global.textRenderer.renderString(DPAD_STRING, rightHandedCheckbox.xPos + rightHandedCheckbox.size + (int)(0.5f * Level.TILE_SIZE) + (3 * TextRenderer.TEXTSCALE_SMALL), rightHandedCheckbox.yPos + (int)(0.75 * Level.TILE_SIZE), TextRenderer.TEXTSCALE_SMALL);
-        Global.textRenderer.renderString(DPAD_OPACITY_STRING, dpadOpacitySlider.xPos + (int)(0.5f * TextRenderer.TEXTSCALE_MEDIUM), dpadOpacitySlider.yPos - TextRenderer.TEXTSCALE_MEDIUM, TextRenderer.TEXTSCALE_MEDIUM);
-        Global.textRenderer.renderString(SHOW_FPS_STRING, (int)(showFPSAndDeltaCheckbox.xPos + showFPSAndDeltaCheckbox.size + (int)(0.5f * Level.TILE_SIZE) + (1.5f * TextRenderer.TEXTSCALE_SMALL)), showFPSAndDeltaCheckbox.yPos + (int)(0.25 * Level.TILE_SIZE), TextRenderer.TEXTSCALE_SMALL);
-        Global.textRenderer.renderString(AND_DELTA_STRING, (int)(showFPSAndDeltaCheckbox.xPos + showFPSAndDeltaCheckbox.size + (int)(0.5f * Level.TILE_SIZE) + TextRenderer.TEXTSCALE_SMALL), showFPSAndDeltaCheckbox.yPos + (int)(0.75 * Level.TILE_SIZE), TextRenderer.TEXTSCALE_SMALL);
+        TextRenderer.renderString(OPTIONS_STRING, (int)(0.5f * Level.TILE_SIZE), 0, Level.TILE_SIZE);
+        TextRenderer.renderString(LEFT_HANDED_STRING, rightHandedCheckbox.xPos + rightHandedCheckbox.size + (int)(0.5f * Level.TILE_SIZE), rightHandedCheckbox.yPos + (int)(0.25 * Level.TILE_SIZE), TextRenderer.TEXTSCALE_SMALL);
+        TextRenderer.renderString(DPAD_STRING, rightHandedCheckbox.xPos + rightHandedCheckbox.size + (int)(0.5f * Level.TILE_SIZE) + (3 * TextRenderer.TEXTSCALE_SMALL), rightHandedCheckbox.yPos + (int)(0.75 * Level.TILE_SIZE), TextRenderer.TEXTSCALE_SMALL);
+        TextRenderer.renderString(DPAD_OPACITY_STRING, dpadOpacitySlider.xPos + (int)(0.5f * TextRenderer.TEXTSCALE_MEDIUM), dpadOpacitySlider.yPos - TextRenderer.TEXTSCALE_MEDIUM, TextRenderer.TEXTSCALE_MEDIUM);
+        TextRenderer.renderString(SHOW_FPS_STRING, (int)(showFPSAndDeltaCheckbox.xPos + showFPSAndDeltaCheckbox.size + (int)(0.5f * Level.TILE_SIZE) + (1.5f * TextRenderer.TEXTSCALE_SMALL)), showFPSAndDeltaCheckbox.yPos + (int)(0.25 * Level.TILE_SIZE), TextRenderer.TEXTSCALE_SMALL);
+        TextRenderer.renderString(AND_DELTA_STRING, (int)(showFPSAndDeltaCheckbox.xPos + showFPSAndDeltaCheckbox.size + (int)(0.5f * Level.TILE_SIZE) + TextRenderer.TEXTSCALE_SMALL), showFPSAndDeltaCheckbox.yPos + (int)(0.75 * Level.TILE_SIZE), TextRenderer.TEXTSCALE_SMALL);
 
         rightHandedCheckbox.update();
         rightHanded = rightHandedCheckbox.isChecked;
@@ -136,13 +135,13 @@ public class OptionsScreenState extends GameState {
         showFPSAndDeltaCheckbox.render();
 
         String dpadOpacityPercentageString = (int)(dpadOpacitySlider.value * 100.0f) + "%";
-        Global.textRenderer.renderString(dpadOpacityPercentageString, dpadOpacitySlider.xPos + (dpadOpacitySlider.width / 2) - ((dpadOpacityPercentageString.length() * TextRenderer.TEXTSCALE_LARGE) / 2), (int)(dpadOpacitySlider.yPos + 0.35f * Level.TILE_SIZE), TextRenderer.TEXTSCALE_LARGE);
+        TextRenderer.renderString(dpadOpacityPercentageString, dpadOpacitySlider.xPos + (dpadOpacitySlider.width / 2) - ((dpadOpacityPercentageString.length() * TextRenderer.TEXTSCALE_LARGE) / 2), (int)(dpadOpacitySlider.yPos + 0.35f * Level.TILE_SIZE), TextRenderer.TEXTSCALE_LARGE);
         String saveString = "SAVE";
         if(startGameOnExit) saveString += " & PLAY";
         int saveScale = TextRenderer.TEXTSCALE_LARGE;
         if(startGameOnExit) saveScale = TextRenderer.TEXTSCALE_MEDIUM;
-        Global.textRenderer.renderString(saveString, saveButton.xPos + (saveButton.width / 2) - ((saveString.length() * saveScale) / 2), (int)(saveButton.yPos + 0.35f * Level.TILE_SIZE), saveScale);
-        Global.textRenderer.renderString("ABORT", abortButton.xPos + (abortButton.width / 2) - ((ABORT_STRING.length() * TextRenderer.TEXTSCALE_LARGE) / 2), (int)(abortButton.yPos + 0.35f * Level.TILE_SIZE), TextRenderer.TEXTSCALE_LARGE);
+        TextRenderer.renderString(saveString, saveButton.xPos + (saveButton.width / 2) - ((saveString.length() * saveScale) / 2), (int)(saveButton.yPos + 0.35f * Level.TILE_SIZE), saveScale);
+        TextRenderer.renderString("ABORT", abortButton.xPos + (abortButton.width / 2) - ((ABORT_STRING.length() * TextRenderer.TEXTSCALE_LARGE) / 2), (int)(abortButton.yPos + 0.35f * Level.TILE_SIZE), TextRenderer.TEXTSCALE_LARGE);
     }
 
     @Override

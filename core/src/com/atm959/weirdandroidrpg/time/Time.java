@@ -1,4 +1,4 @@
-package com.atm959.weirdandroidrpg.global;
+package com.atm959.weirdandroidrpg.time;
 
 /**
  * Created by atm959 on 3/24/2022.

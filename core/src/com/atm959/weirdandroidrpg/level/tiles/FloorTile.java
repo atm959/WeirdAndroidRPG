@@ -10,6 +10,11 @@ public class FloorTile extends Tile {
         this.atlasID = 0;
     }
 
+    @Override
+    public void onPlayerWalkInto(){
+        this.atlasID = 255;
+    }
+
     public FloorTile(FloorTile tile){
         super(tile);
     }

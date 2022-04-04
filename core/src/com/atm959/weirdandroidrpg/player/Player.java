@@ -1,9 +1,8 @@
 package com.atm959.weirdandroidrpg.player;
 
-import com.atm959.weirdandroidrpg.global.Time;
+import com.atm959.weirdandroidrpg.time.Time;
 import com.atm959.weirdandroidrpg.input.DPad;
 import com.atm959.weirdandroidrpg.level.Level;
-import com.atm959.weirdandroidrpg.level.tiles.AirTile;
 import com.atm959.weirdandroidrpg.util.Util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
