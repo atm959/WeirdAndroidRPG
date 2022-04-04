@@ -1,12 +1,12 @@
 package com.atm959.weirdandroidrpg.gamestates;
 
 import com.atm959.weirdandroidrpg.audio.BGM;
-import com.atm959.weirdandroidrpg.time.Time;
 import com.atm959.weirdandroidrpg.input.Button;
 import com.atm959.weirdandroidrpg.input.DPad;
 import com.atm959.weirdandroidrpg.items.ItemRenderer;
 import com.atm959.weirdandroidrpg.level.Level;
 import com.atm959.weirdandroidrpg.player.Player;
+import com.atm959.weirdandroidrpg.time.Time;
 import com.atm959.weirdandroidrpg.util.Util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -21,31 +21,31 @@ import com.badlogic.gdx.utils.ScreenUtils;
  * Created by atm959 on 3/23/2022.
  */
 public class InGameState extends GameState {
-    private Level level;
-    private ItemRenderer itemRenderer;
-    private Player player;
-    private DPad dPad;
-    private Button mapButton;
-    private Button menuButton;
+    private final Level level;
+    private final ItemRenderer itemRenderer;
+    private final Player player;
+    private final DPad dPad;
+    private final Button mapButton;
+    private final Button menuButton;
 
-    private float m_fboScaler = 1.5f;
-    private boolean m_fboEnabled = true;
-    private FrameBuffer m_fbo;
-    private TextureRegion m_fboRegion;
-    private SpriteBatch sb;
+    private final float m_fboScaler = 1.5f;
+    private final boolean m_fboEnabled = true;
+    private final FrameBuffer m_fbo;
+    private final TextureRegion m_fboRegion;
+    private final SpriteBatch sb;
 
-    private ShaderProgram shader;
-    private Texture dudvMap;
+    private final ShaderProgram shader;
+    private final Texture dudvMap;
     private float time;
 
     private static final String VERT =
-            "attribute vec4 "+ShaderProgram.POSITION_ATTRIBUTE+";\n" +
-            "attribute vec4 "+ShaderProgram.COLOR_ATTRIBUTE+";\n" +
-            "attribute vec2 "+ShaderProgram.TEXCOORD_ATTRIBUTE+"0;\n" +
+            "attribute vec4 " + ShaderProgram.POSITION_ATTRIBUTE + ";\n" +
+                    "attribute vec4 " + ShaderProgram.COLOR_ATTRIBUTE + ";\n" +
+                    "attribute vec2 " + ShaderProgram.TEXCOORD_ATTRIBUTE + "0;\n" +
 
-            "uniform mat4 u_projTrans;\n" +
-            " \n" +
-            "varying vec4 vColor;\n" +
+                    "uniform mat4 u_projTrans;\n" +
+                    " \n" +
+                    "varying vec4 vColor;\n" +
             "varying vec2 vTexCoord;\n" +
 
             "void main() {\n" +
