@@ -29,7 +29,6 @@ public class InGameState extends GameState {
     private final Button menuButton;
 
     private final float m_fboScaler = 1.5f;
-    private final boolean m_fboEnabled = true;
     private final FrameBuffer m_fbo;
     private final TextureRegion m_fboRegion;
     private final SpriteBatch sb;
@@ -40,14 +39,12 @@ public class InGameState extends GameState {
 
     private static final String VERT =
             "attribute vec4 " + ShaderProgram.POSITION_ATTRIBUTE + ";\n" +
-                    "attribute vec4 " + ShaderProgram.COLOR_ATTRIBUTE + ";\n" +
-                    "attribute vec2 " + ShaderProgram.TEXCOORD_ATTRIBUTE + "0;\n" +
-
-                    "uniform mat4 u_projTrans;\n" +
-                    " \n" +
-                    "varying vec4 vColor;\n" +
+            "attribute vec4 " + ShaderProgram.COLOR_ATTRIBUTE + ";\n" +
+            "attribute vec2 " + ShaderProgram.TEXCOORD_ATTRIBUTE + "0;\n" +
+            "uniform mat4 u_projTrans;\n" +
+            " \n" +
+            "varying vec4 vColor;\n" +
             "varying vec2 vTexCoord;\n" +
-
             "void main() {\n" +
             "	vColor = "+ShaderProgram.COLOR_ATTRIBUTE+";\n" +
             "	vTexCoord = "+ShaderProgram.TEXCOORD_ATTRIBUTE+"0;\n" +
