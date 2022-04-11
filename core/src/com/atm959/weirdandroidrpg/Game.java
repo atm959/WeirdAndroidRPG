@@ -2,12 +2,13 @@ package com.atm959.weirdandroidrpg;
 
 import com.atm959.weirdandroidrpg.gamestates.StateManager;
 import com.atm959.weirdandroidrpg.gamestates.TitleState;
-import com.atm959.weirdandroidrpg.time.Time;
 import com.atm959.weirdandroidrpg.input.TouchInput;
 import com.atm959.weirdandroidrpg.items.items.Item;
 import com.atm959.weirdandroidrpg.level.tiles.Tile;
+import com.atm959.weirdandroidrpg.npc.npcs.NPC;
 import com.atm959.weirdandroidrpg.savedata.Options;
 import com.atm959.weirdandroidrpg.text.TextRenderer;
+import com.atm959.weirdandroidrpg.time.Time;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -21,6 +22,7 @@ public class Game extends ApplicationAdapter {
 		Options.load();
 		Tile.InitTileTypes();
 		Item.InitItemTypes();
+		NPC.InitNPCTypes();
 		StateManager.initStack();
 		StateManager.pushState(new TitleState());
 		TextRenderer.init();

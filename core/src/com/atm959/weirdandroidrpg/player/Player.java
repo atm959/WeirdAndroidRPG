@@ -1,8 +1,9 @@
 package com.atm959.weirdandroidrpg.player;
 
-import com.atm959.weirdandroidrpg.time.Time;
 import com.atm959.weirdandroidrpg.input.DPad;
 import com.atm959.weirdandroidrpg.level.Level;
+import com.atm959.weirdandroidrpg.npc.npcs.NPC;
+import com.atm959.weirdandroidrpg.time.Time;
 import com.atm959.weirdandroidrpg.util.Util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -25,7 +26,7 @@ public class Player {
         sb = new SpriteBatch();
     }
 
-    public void takeStep(Level level, DPad dpad){
+    public void takeStep(Level level, DPad dpad, NPC[] loadedNPCs){
         final Vector2[] dpadDirections = {
                 new Vector2(0, -1),
                 new Vector2(0, 1),
@@ -70,6 +71,10 @@ public class Player {
         if(playerMovedX || playerMovedY) {
             level.getTile(oldX, oldY).onPlayerWalkOutOf();
             level.getTile(xPos, yPos).onPlayerWalkInto();
+
+            for(int i = 0; i < loadedNPCs.length; i++){
+                loadedNPCs[i].onPlayerTakeStep(this, loadedNPCs);
+            }
         }
     }
 

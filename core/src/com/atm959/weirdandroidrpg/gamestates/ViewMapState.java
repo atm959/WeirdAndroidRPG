@@ -1,15 +1,18 @@
 package com.atm959.weirdandroidrpg.gamestates;
 
-import com.atm959.weirdandroidrpg.time.Time;
 import com.atm959.weirdandroidrpg.input.TouchInput;
+import com.atm959.weirdandroidrpg.items.items.Item;
 import com.atm959.weirdandroidrpg.items.items.NothingItem;
 import com.atm959.weirdandroidrpg.level.Level;
 import com.atm959.weirdandroidrpg.level.tiles.DoorTile;
 import com.atm959.weirdandroidrpg.level.tiles.FloorTile;
 import com.atm959.weirdandroidrpg.level.tiles.Tile;
 import com.atm959.weirdandroidrpg.level.tiles.WallTile;
+import com.atm959.weirdandroidrpg.npc.npcs.NPC;
+import com.atm959.weirdandroidrpg.npc.npcs.NothingNPC;
 import com.atm959.weirdandroidrpg.player.Player;
 import com.atm959.weirdandroidrpg.text.TextRenderer;
+import com.atm959.weirdandroidrpg.time.Time;
 import com.atm959.weirdandroidrpg.util.Util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -22,6 +25,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class ViewMapState extends GameState {
     private Level level;
     private Player player;
+    private Item[] loadedItems;
+    private NPC[] loadedNPCs;
 
     private Texture texture;
     private SpriteBatch sb;
@@ -35,9 +40,11 @@ public class ViewMapState extends GameState {
     private SpriteBatch bgSB;
     float bgOffsetX = 0.0f, bgOffsetY = 0.0f;
 
-    public ViewMapState(Level level, Player player){
+    public ViewMapState(Level level, Player player, Item[] loadedItems, NPC[] loadedNPCs){
         this.level = level;
         this.player = player;
+        this.loadedItems = loadedItems;
+        this.loadedNPCs = loadedNPCs;
 
         sb = new SpriteBatch();
         mapPixels = new Pixmap(64, 64, Pixmap.Format.RGBA8888);
@@ -90,9 +97,21 @@ public class ViewMapState extends GameState {
             }
         }
 
-        for(int i = 0; i < 256; i++){
-            if(!(level.itemsOnGround[i] instanceof NothingItem)){
-                mapPixels.drawPixel(level.itemsOnGround[i].xPos, level.itemsOnGround[i].yPos, 0x0000FFFF);
+        for(int i = 0; i < loadedItems.length; i++){
+            if(!(loadedItems[i] instanceof NothingItem)){
+                mapPixels.drawPixel(loadedItems[i].xPos, loadedItems[i].yPos, 0x0000FFFF);
+            }
+        }
+        for(int i = 0; i < loadedNPCs.length; i++){
+            NPC npc = loadedNPCs[i];
+            int npcPixelColor;
+            if(!(npc instanceof NothingNPC)){
+                if(npc.isEnemy){
+                    npcPixelColor = 0xFF0000FF;
+                } else {
+                    npcPixelColor = 0x00FF00FF;
+                }
+                mapPixels.drawPixel(npc.xPos, npc.yPos, npcPixelColor);
             }
         }
 

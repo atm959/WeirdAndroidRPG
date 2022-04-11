@@ -1,6 +1,5 @@
 package com.atm959.weirdandroidrpg.level;
 
-import com.atm959.weirdandroidrpg.items.items.Item;
 import com.atm959.weirdandroidrpg.level.tiles.AirTile;
 import com.atm959.weirdandroidrpg.level.tiles.Tile;
 import com.atm959.weirdandroidrpg.util.Util;
@@ -13,8 +12,6 @@ import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
-import java.util.Random;
-
 /**
  * Created by atm959 on 3/23/2022.
  */
@@ -23,7 +20,6 @@ public class Level {
 
     public int scrollX = 0, scrollY = 0;
     public Tile[][] tiles;
-    public Item[] itemsOnGround;
 
     private Texture tileset;
     private SpriteBatch sb;
@@ -48,16 +44,6 @@ public class Level {
         }
         tileset = new Texture("level/tileset.png");
         sb = new SpriteBatch();
-
-        itemsOnGround = new Item[256];
-        for(int i = 0; i < 256; i++){
-            int random = new Random().nextInt(4);
-            itemsOnGround[i] = Item.ITEM_TYPES.get(random).copy();
-            while(getTile(itemsOnGround[i].xPos, itemsOnGround[i].yPos).isSolid){
-                itemsOnGround[i].xPos = new Random().nextInt(64);
-                itemsOnGround[i].yPos = new Random().nextInt(64);
-            }
-        }
     }
 
     public void update(){}

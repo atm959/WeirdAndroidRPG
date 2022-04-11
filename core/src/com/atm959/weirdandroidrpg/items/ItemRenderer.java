@@ -2,7 +2,6 @@ package com.atm959.weirdandroidrpg.items;
 
 import com.atm959.weirdandroidrpg.items.items.Item;
 import com.atm959.weirdandroidrpg.level.Level;
-import com.atm959.weirdandroidrpg.level.tiles.Tile;
 import com.atm959.weirdandroidrpg.util.Util;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -19,14 +18,14 @@ public class ItemRenderer {
         sb = new SpriteBatch();
     }
 
-    public void renderLevelItems(Level level){
+    public void renderLevelItems(int scrollX, int scrollY, Item[] loadedItems){
         sb.begin();
-        for(int i = 0; i < 256; i++){
-            Item item = level.itemsOnGround[i];
+        for(int i = 0; i < loadedItems.length; i++){
+            Item item = loadedItems[i];
             if(item.isRendered) {
                 int srcX = (item.atlasID % 16) * 16;
                 int srcY = (item.atlasID / 16) * 16;
-                sb.draw(itemAtlas, (item.xPos * Level.TILE_SIZE) - level.scrollX, Util.convertY((item.yPos * Level.TILE_SIZE) - level.scrollY, Level.TILE_SIZE), Level.TILE_SIZE, Level.TILE_SIZE, srcX, srcY, 16, 16, false, false);
+                sb.draw(itemAtlas, (item.xPos * Level.TILE_SIZE) - scrollX, Util.convertY((item.yPos * Level.TILE_SIZE) - scrollY, Level.TILE_SIZE), Level.TILE_SIZE, Level.TILE_SIZE, srcX, srcY, 16, 16, false, false);
             }
         }
         sb.end();

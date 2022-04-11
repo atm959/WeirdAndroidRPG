@@ -4,7 +4,10 @@ import com.atm959.weirdandroidrpg.audio.BGM;
 import com.atm959.weirdandroidrpg.input.Button;
 import com.atm959.weirdandroidrpg.input.DPad;
 import com.atm959.weirdandroidrpg.items.ItemRenderer;
+import com.atm959.weirdandroidrpg.items.items.Item;
 import com.atm959.weirdandroidrpg.level.Level;
+import com.atm959.weirdandroidrpg.npc.NPCRenderer;
+import com.atm959.weirdandroidrpg.npc.npcs.NPC;
 import com.atm959.weirdandroidrpg.player.Player;
 import com.atm959.weirdandroidrpg.time.Time;
 import com.atm959.weirdandroidrpg.util.Util;
@@ -17,24 +20,31 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.util.Random;
+
 /**
  * Created by atm959 on 3/23/2022.
  */
 public class InGameState extends GameState {
-    private final Level level;
-    private final ItemRenderer itemRenderer;
-    private final Player player;
-    private final DPad dPad;
-    private final Button mapButton;
-    private final Button menuButton;
+    private Level level;
+    private Item[] itemsOnGround;
+    private NPC[] npcsInLevel;
+    private float npcFlippedTimer;
+    private boolean npcsAreFlipped;
+    private ItemRenderer itemRenderer;
+    private NPCRenderer npcRenderer;
+    private Player player;
+    private DPad dPad;
+    private Button mapButton;
+    private Button menuButton;
 
-    private final float m_fboScaler = 1.5f;
-    private final FrameBuffer m_fbo;
-    private final TextureRegion m_fboRegion;
-    private final SpriteBatch sb;
+    private float m_fboScaler = 1.5f;
+    private FrameBuffer m_fbo;
+    private TextureRegion m_fboRegion;
+    private SpriteBatch sb;
 
-    private final ShaderProgram shader;
-    private final Texture dudvMap;
+    private ShaderProgram shader;
+    private Texture dudvMap;
     private float time;
 
     private static final String VERT =
@@ -79,7 +89,26 @@ public class InGameState extends GameState {
         BGM.playSong(1);
 
         level = new Level();
+        itemsOnGround = new Item[256];
+        for(int i = 0; i < 256; i++){
+            int random = new Random().nextInt(4);
+            itemsOnGround[i] = Item.ITEM_TYPES.get(random).copy();
+            while(level.getTile(itemsOnGround[i].xPos, itemsOnGround[i].yPos).isSolid){
+                itemsOnGround[i].xPos = new Random().nextInt(64);
+                itemsOnGround[i].yPos = new Random().nextInt(64);
+            }
+        }
+        npcsInLevel = new NPC[256];
+        for(int i = 0; i < 256; i++){
+            int random = new Random().nextInt(4);
+            npcsInLevel[i] = NPC.NPC_TYPES.get(random).copy();
+            while(level.getTile(npcsInLevel[i].xPos, npcsInLevel[i].yPos).isSolid){
+                npcsInLevel[i].xPos = new Random().nextInt(64);
+                npcsInLevel[i].yPos = new Random().nextInt(64);
+            }
+        }
         itemRenderer = new ItemRenderer();
+        npcRenderer = new NPCRenderer();
         player = new Player();
         player.xPos = 4;
         player.yPos = 8;
@@ -108,7 +137,7 @@ public class InGameState extends GameState {
             System.err.println(shader.getLog());
             System.exit(0);
         }
-        if (shader.getLog().length()!=0) System.out.println(shader.getLog());
+        if (shader.getLog().length() != 0) System.out.println(shader.getLog());
 
         dudvMap = new Texture("level/dudvMap.png");
         dudvMap.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
@@ -119,13 +148,13 @@ public class InGameState extends GameState {
     public void run(){
         dPad.update();
         level.update();
-        if(dPad.directionIsPressed) player.takeStep(level, dPad);
+        if(dPad.directionIsPressed) player.takeStep(level, dPad, npcsInLevel);
         player.update(level);
 
         mapButton.update();
         menuButton.update();
         if(mapButton.isPressed){
-            StateManager.pushState(new ViewMapState(level, player));
+            StateManager.pushState(new ViewMapState(level, player, itemsOnGround, npcsInLevel));
         }
         if(menuButton.isPressed){
             StateManager.replaceCurrentState(new TitleState());
@@ -134,7 +163,14 @@ public class InGameState extends GameState {
         m_fbo.begin();
         ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1.0f);
         level.render();
-        itemRenderer.renderLevelItems(level);
+        itemRenderer.renderLevelItems(level.scrollX, level.scrollY, itemsOnGround);
+        npcFlippedTimer += 2.5f * Time.deltaTime;
+        if(npcFlippedTimer > 500.0f){
+            npcsAreFlipped = !npcsAreFlipped;
+            npcFlippedTimer = 0.0f;
+        }
+        npcRenderer.setNpcsAreFlipped(npcsAreFlipped);
+        npcRenderer.renderLevelNPCs(level.scrollX, level.scrollY, npcsInLevel);
         player.render(level);
         m_fbo.end();
 
