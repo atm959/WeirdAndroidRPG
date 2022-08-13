@@ -1,7 +1,5 @@
 package com.atm959.weirdandroidrpg.level.tiles;
 
-import com.badlogic.gdx.Gdx;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 

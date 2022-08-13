@@ -7,6 +7,9 @@ import com.badlogic.gdx.audio.Music;
  * Created by atm959 on 3/29/2022.
  */
 public class BGM {
+	public static int SONG_TITLE = 0;
+	public static int SONG_IN_GAME = 1;
+
     public static final String[] songFiles = {
         "title/bgm.mp3",
         "level/bgm.mp3"

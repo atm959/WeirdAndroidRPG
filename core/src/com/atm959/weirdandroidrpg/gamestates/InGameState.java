@@ -56,8 +56,8 @@ public class InGameState extends GameState {
             "varying vec4 vColor;\n" +
             "varying vec2 vTexCoord;\n" +
             "void main() {\n" +
-            "	vColor = "+ShaderProgram.COLOR_ATTRIBUTE+";\n" +
-            "	vTexCoord = "+ShaderProgram.TEXCOORD_ATTRIBUTE+"0;\n" +
+            "	vColor = " + ShaderProgram.COLOR_ATTRIBUTE + ";\n" +
+            "	vTexCoord = " + ShaderProgram.TEXCOORD_ATTRIBUTE + "0;\n" +
             "	gl_Position =  u_projTrans * " + ShaderProgram.POSITION_ATTRIBUTE + ";\n" +
             "}";
 
@@ -81,12 +81,12 @@ public class InGameState extends GameState {
             "   vec2 distortion = vec2((finalDudv.r * 2.0) - 1.0, (finalDudv.g * 2.0) - 1.0) * 0.01;\n" +
             "   vec2 newTexCoord = vec2(vTexCoord.x + distortion.x, vTexCoord.y + distortion.y);\n" +
             "   vec4 newColor = texture2D(u_texture, newTexCoord);\n" +
-            "   newColor *= vec4(1.0, 1.0, 2.0, 1.0);\n" +
+            "   newColor *= vec4(1.0, 1.0, 2.0 + ((distortion.x + distortion.y) * 100.0), 1.0);\n" +
             "	gl_FragColor = vColor * newColor;\n" +
             "}";
 
     public InGameState(){
-        BGM.playSong(1);
+        BGM.playSong(BGM.SONG_IN_GAME);
 
         level = new Level();
         itemsOnGround = new Item[256];

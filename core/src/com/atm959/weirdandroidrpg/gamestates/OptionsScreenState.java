@@ -1,12 +1,12 @@
 package com.atm959.weirdandroidrpg.gamestates;
 
-import com.atm959.weirdandroidrpg.time.Time;
 import com.atm959.weirdandroidrpg.input.Button;
 import com.atm959.weirdandroidrpg.input.CheckBox;
 import com.atm959.weirdandroidrpg.input.Slider;
 import com.atm959.weirdandroidrpg.level.Level;
 import com.atm959.weirdandroidrpg.savedata.Options;
 import com.atm959.weirdandroidrpg.text.TextRenderer;
+import com.atm959.weirdandroidrpg.time.Time;
 import com.atm959.weirdandroidrpg.util.Util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -60,12 +60,14 @@ public class OptionsScreenState extends GameState {
         saveButton.yPos = Gdx.graphics.getHeight() - (3 * Level.TILE_SIZE);
         saveButton.width = (int)(7.0f * Level.TILE_SIZE);
         saveButton.height = (int)(1.5f * Level.TILE_SIZE);
+		saveButton.label = "SAVE";
 
         abortButton = new Button();
         abortButton.xPos = (int) (0.5f * Level.TILE_SIZE);
         abortButton.width = (int) (7.0f * Level.TILE_SIZE);
         abortButton.height = (int) (1.5f * Level.TILE_SIZE);
         abortButton.yPos = saveButton.yPos - abortButton.height;
+		abortButton.label = "ABORT";
 
         showFPSAndDeltaCheckbox = new CheckBox();
         showFPSAndDeltaCheckbox.xPos = (int)(0.5f * Level.TILE_SIZE);
@@ -130,8 +132,6 @@ public class OptionsScreenState extends GameState {
 
         rightHandedCheckbox.render();
         dpadOpacitySlider.render();
-        saveButton.render();
-        abortButton.render();
         showFPSAndDeltaCheckbox.render();
 
         String dpadOpacityPercentageString = (int)(dpadOpacitySlider.value * 100.0f) + "%";
@@ -140,8 +140,9 @@ public class OptionsScreenState extends GameState {
         if(startGameOnExit) saveString += " & PLAY";
         int saveScale = TextRenderer.TEXTSCALE_LARGE;
         if(startGameOnExit) saveScale = TextRenderer.TEXTSCALE_MEDIUM;
-        TextRenderer.renderString(saveString, saveButton.xPos + (saveButton.width / 2) - ((saveString.length() * saveScale) / 2), (int)(saveButton.yPos + 0.35f * Level.TILE_SIZE), saveScale);
-        TextRenderer.renderString("ABORT", abortButton.xPos + (abortButton.width / 2) - ((ABORT_STRING.length() * TextRenderer.TEXTSCALE_LARGE) / 2), (int)(abortButton.yPos + 0.35f * Level.TILE_SIZE), TextRenderer.TEXTSCALE_LARGE);
+        saveButton.label = saveString;
+		saveButton.render();
+		abortButton.render();
     }
 
     @Override
@@ -149,7 +150,7 @@ public class OptionsScreenState extends GameState {
         rightHandedCheckbox.dispose();
         dpadOpacitySlider.dispose();
         saveButton.dispose();
-        if(!startGameOnExit) abortButton.dispose();
+        abortButton.dispose();
         showFPSAndDeltaCheckbox.dispose();
         bgTex.dispose();
         bgSB.dispose();

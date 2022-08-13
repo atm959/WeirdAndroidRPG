@@ -19,7 +19,7 @@ public class ScriptTestState extends GameState {
     };
 
     public ScriptTestState(){
-        BGM.playSong(0);
+        BGM.playSong(BGM.SONG_TITLE);
 
         scriptCompiler = new ScriptCompiler();
         scriptCompiler.compileScript("scripts/testScript.txt");

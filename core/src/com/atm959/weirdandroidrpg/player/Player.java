@@ -73,7 +73,7 @@ public class Player {
             level.getTile(xPos, yPos).onPlayerWalkInto();
 
             for(int i = 0; i < loadedNPCs.length; i++){
-                loadedNPCs[i].onPlayerTakeStep(this, loadedNPCs);
+                loadedNPCs[i].onPlayerTakeStep(this, loadedNPCs, level);
             }
         }
     }

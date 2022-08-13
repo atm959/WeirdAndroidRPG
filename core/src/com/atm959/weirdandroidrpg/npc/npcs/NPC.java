@@ -1,5 +1,6 @@
 package com.atm959.weirdandroidrpg.npc.npcs;
 
+import com.atm959.weirdandroidrpg.level.Level;
 import com.atm959.weirdandroidrpg.npc.npcs.enemies.FrownEnemyNPC;
 import com.atm959.weirdandroidrpg.npc.npcs.enemies.TestEnemyNPC;
 import com.atm959.weirdandroidrpg.npc.npcs.friendly.SmileFriendlyNPC;
@@ -30,7 +31,7 @@ public class NPC {
     public void update(){}
     public void dispose(){}
 
-    public void onPlayerTakeStep(Player player, NPC[] loadedNPCs){
+    public void onPlayerTakeStep(Player player, NPC[] loadedNPCs, Level level){
         int oldX = xPos;
         int oldY = yPos;
 
@@ -48,6 +49,18 @@ public class NPC {
                 }
             }
         }
+
+		//Crude collision with solid tiles
+		if(level.getTile(xPos, oldY).isSolid){
+			xPos = oldX;
+		}
+		if(level.getTile(oldX, yPos).isSolid){
+			yPos = oldY;
+		}
+		if(level.getTile(xPos, yPos).isSolid){
+			xPos = oldX;
+			yPos = oldY;
+		}
     }
 
     public NPC(NPC npc){

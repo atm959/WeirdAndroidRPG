@@ -7,6 +7,7 @@ import com.atm959.weirdandroidrpg.items.items.Item;
 import com.atm959.weirdandroidrpg.level.tiles.Tile;
 import com.atm959.weirdandroidrpg.npc.npcs.NPC;
 import com.atm959.weirdandroidrpg.savedata.Options;
+import com.atm959.weirdandroidrpg.sharingimage.SharingImage;
 import com.atm959.weirdandroidrpg.text.TextRenderer;
 import com.atm959.weirdandroidrpg.time.Time;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -17,6 +18,12 @@ import com.badlogic.gdx.utils.ScreenUtils;
  * Created by atm959 on 3/22/2022.
  */
 public class Game extends ApplicationAdapter {
+	public static ImageSharingAPI imageSharingAPI;
+
+	public Game(ImageSharingAPI imageShareAPI){
+		imageSharingAPI = imageShareAPI;
+	}
+
 	@Override
 	public void create () {
 		Options.load();
@@ -26,6 +33,7 @@ public class Game extends ApplicationAdapter {
 		StateManager.initStack();
 		StateManager.pushState(new TitleState());
 		TextRenderer.init();
+		SharingImage.init();
 	}
 
 	@Override
@@ -43,10 +51,12 @@ public class Game extends ApplicationAdapter {
 			TextRenderer.renderString("STATES: " + StateManager.stateStack.size(), 0, Gdx.graphics.getHeight() - TextRenderer.TEXTSCALE_LARGE - TextRenderer.TEXTSCALE_MEDIUM - TextRenderer.TEXTSCALE_LARGE, TextRenderer.TEXTSCALE_LARGE);
 		}
 	}
-	
+
 	@Override
 	public void dispose () {
 		TextRenderer.dispose();
 		StateManager.disposeAll();
+
+		SharingImage.dispose();
 	}
 }
