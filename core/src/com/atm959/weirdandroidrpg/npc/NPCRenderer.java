@@ -30,7 +30,7 @@ public class NPCRenderer {
             if(npc.isRendered) {
                 int srcX = (npc.atlasID % 16) * 16;
                 int srcY = (npc.atlasID / 16) * 16;
-                sb.draw(npcAtlas, (npc.xPos * Level.TILE_SIZE) - scrollX, Util.convertY((npc.yPos * Level.TILE_SIZE) - scrollY, Level.TILE_SIZE), Level.TILE_SIZE, Level.TILE_SIZE, srcX, srcY, 16, 16, npcsAreFlipped, false);
+                sb.draw(npcAtlas, (npc.xPos * Level.tileSize) - scrollX, Util.convertY((npc.yPos * Level.tileSize) - scrollY, Level.tileSize), Level.tileSize, Level.tileSize, srcX, srcY, 16, 16, npcsAreFlipped, false);
             }
         }
         sb.end();

@@ -131,10 +131,10 @@ public class ViewMapState extends GameState {
         texture = new Texture(mapPixels);
 
         sb.begin();
-        int bgYPos = (Gdx.graphics.getHeight() / 2) - ((8 * Level.TILE_SIZE) / 2);
-        sb.draw(mapBG, 0, Util.convertY((int)bgYPos, 8 * Level.TILE_SIZE), 8 * Level.TILE_SIZE, 8 * Level.TILE_SIZE);
-        int yPos = (Gdx.graphics.getHeight() / 2) - ((7 * Level.TILE_SIZE) / 2);
-        sb.draw(texture, 0.5f * Level.TILE_SIZE, Util.convertY((int)yPos, 7 * Level.TILE_SIZE), 7 * Level.TILE_SIZE, 7 * Level.TILE_SIZE);
+        int bgYPos = (Gdx.graphics.getHeight() / 2) - ((8 * Level.tileSize) / 2);
+        sb.draw(mapBG, 0, Util.convertY((int)bgYPos, 8 * Level.tileSize), 8 * Level.tileSize, 8 * Level.tileSize);
+        int yPos = (Gdx.graphics.getHeight() / 2) - ((7 * Level.tileSize) / 2);
+        sb.draw(texture, 0.5f * Level.tileSize, Util.convertY((int)yPos, 7 * Level.tileSize), 7 * Level.tileSize, 7 * Level.tileSize);
         sb.end();
 
         if(TouchInput.touched){

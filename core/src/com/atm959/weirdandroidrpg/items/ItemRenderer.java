@@ -25,7 +25,7 @@ public class ItemRenderer {
             if(item.isRendered) {
                 int srcX = (item.atlasID % 16) * 16;
                 int srcY = (item.atlasID / 16) * 16;
-                sb.draw(itemAtlas, (item.xPos * Level.TILE_SIZE) - scrollX, Util.convertY((item.yPos * Level.TILE_SIZE) - scrollY, Level.TILE_SIZE), Level.TILE_SIZE, Level.TILE_SIZE, srcX, srcY, 16, 16, false, false);
+                sb.draw(itemAtlas, (item.xPos * Level.tileSize) - scrollX, Util.convertY((item.yPos * Level.tileSize) - scrollY, Level.tileSize), Level.tileSize, Level.tileSize, srcX, srcY, 16, 16, false, false);
             }
         }
         sb.end();

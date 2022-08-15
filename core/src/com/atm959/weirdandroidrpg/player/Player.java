@@ -79,19 +79,19 @@ public class Player {
     }
 
     public void update(Level level){
-        int onScreenX = (xPos * Level.TILE_SIZE) - level.scrollX;
-        int onScreenY = (yPos * Level.TILE_SIZE) - level.scrollY;
-        int numTilesY = Gdx.graphics.getHeight() / Level.TILE_SIZE;
+        int onScreenX = (xPos * Level.tileSize) - level.scrollX;
+        int onScreenY = (yPos * Level.tileSize) - level.scrollY;
+        int numTilesY = Gdx.graphics.getHeight() / Level.tileSize;
 
-        if(onScreenX < (3 * Level.TILE_SIZE)) level.scrollX -= (SCROLL_SPEED * Time.deltaTime);
-        if((onScreenX + Level.TILE_SIZE) > (5 * Level.TILE_SIZE)) level.scrollX += (SCROLL_SPEED * Time.deltaTime);
-        if(onScreenY < (((numTilesY / 2) - 2) * Level.TILE_SIZE)) level.scrollY -= (SCROLL_SPEED * Time.deltaTime);
-        if((onScreenY + Level.TILE_SIZE) > (((numTilesY / 2) + 2) * Level.TILE_SIZE)) level.scrollY += (SCROLL_SPEED * Time.deltaTime);
+        if(onScreenX < (3 * Level.tileSize)) level.scrollX -= (SCROLL_SPEED * Time.deltaTime);
+        if((onScreenX + Level.tileSize) > (5 * Level.tileSize)) level.scrollX += (SCROLL_SPEED * Time.deltaTime);
+        if(onScreenY < (((numTilesY / 2) - 2) * Level.tileSize)) level.scrollY -= (SCROLL_SPEED * Time.deltaTime);
+        if((onScreenY + Level.tileSize) > (((numTilesY / 2) + 2) * Level.tileSize)) level.scrollY += (SCROLL_SPEED * Time.deltaTime);
     }
 
     public void render(Level level){
         sb.begin();
-        sb.draw(texture, (xPos * Level.TILE_SIZE) - level.scrollX, Util.convertY((yPos * Level.TILE_SIZE) - level.scrollY, Level.TILE_SIZE), Level.TILE_SIZE, Level.TILE_SIZE);
+        sb.draw(texture, (xPos * Level.tileSize) - level.scrollX, Util.convertY((yPos * Level.tileSize) - level.scrollY, Level.tileSize), Level.tileSize, Level.tileSize);
         sb.end();
     }
 

@@ -3,7 +3,6 @@ package com.atm959.weirdandroidrpg.level;
 import com.atm959.weirdandroidrpg.level.tiles.AirTile;
 import com.atm959.weirdandroidrpg.level.tiles.Tile;
 import com.atm959.weirdandroidrpg.util.Util;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapLayers;
@@ -16,7 +15,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
  * Created by atm959 on 3/23/2022.
  */
 public class Level {
-    public static final int TILE_SIZE = (Gdx.graphics.getWidth() / 8);
+    public static int tileSize;
 
     public int scrollX = 0, scrollY = 0;
     public Tile[][] tiles;
@@ -64,7 +63,7 @@ public class Level {
                 if(tile.isRendered) {
                     int srcX = (tile.atlasID % 16) * 16;
                     int srcY = (tile.atlasID / 16) * 16;
-                    sb.draw(tileset, (x * TILE_SIZE) - scrollX, Util.convertY((y * TILE_SIZE) - scrollY, TILE_SIZE), TILE_SIZE, TILE_SIZE, srcX, srcY, 16, 16, false, false);
+                    sb.draw(tileset, (x * tileSize) - scrollX, Util.convertY((y * tileSize) - scrollY, tileSize), tileSize, tileSize, srcX, srcY, 16, 16, false, false);
                 }
             }
         }

@@ -117,14 +117,14 @@ public class InGameState extends GameState {
         mapButton = new Button("ui/mapButton.png");
         mapButton.xPos = 0;
         mapButton.yPos = 0;
-        mapButton.width = 2 * Level.TILE_SIZE;
-        mapButton.height = 2 * Level.TILE_SIZE;
+        mapButton.width = 2 * Level.tileSize;
+        mapButton.height = 2 * Level.tileSize;
 
         menuButton = new Button("ui/menuButton.png");
-        menuButton.width = 2 * Level.TILE_SIZE;
+        menuButton.width = 2 * Level.tileSize;
         menuButton.xPos = Gdx.graphics.getWidth() - menuButton.width;
         menuButton.yPos = 0;
-        menuButton.height = 2 * Level.TILE_SIZE;
+        menuButton.height = 2 * Level.tileSize;
 
         m_fbo = new FrameBuffer(Pixmap.Format.RGB565, (int)(Gdx.graphics.getWidth() * m_fboScaler), (int)(Gdx.graphics.getHeight() * m_fboScaler), false);
         m_fboRegion = new TextureRegion(m_fbo.getColorBufferTexture());

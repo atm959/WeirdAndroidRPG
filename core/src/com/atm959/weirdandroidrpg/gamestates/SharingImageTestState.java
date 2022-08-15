@@ -4,7 +4,6 @@ import com.atm959.weirdandroidrpg.input.Button;
 import com.atm959.weirdandroidrpg.level.Level;
 import com.atm959.weirdandroidrpg.sharingimage.SharingImage;
 import com.atm959.weirdandroidrpg.text.TextRenderer;
-import com.atm959.weirdandroidrpg.time.Time;
 import com.atm959.weirdandroidrpg.util.Util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -26,14 +25,14 @@ public class SharingImageTestState extends GameState {
 		backButton = new Button("ui/menuButton.png");
 		backButton.xPos = 0;
 		backButton.yPos = 0;
-		backButton.width = Level.TILE_SIZE * 2;
-		backButton.height = Level.TILE_SIZE * 2;
+		backButton.width = Level.tileSize * 2;
+		backButton.height = Level.tileSize * 2;
 
 		shareButton = new Button("ui/share.png");
 		shareButton.xPos = 0;
-		shareButton.yPos = Level.TILE_SIZE * 2;
-		shareButton.width = Level.TILE_SIZE * 2;
-		shareButton.height = Level.TILE_SIZE * 2;
+		shareButton.yPos = Level.tileSize * 2;
+		shareButton.width = Level.tileSize * 2;
+		shareButton.height = Level.tileSize * 2;
 
 		bgTex = new Texture("ui/rainbow.png");
 		logoTex = new Texture("ui/logo.png");
@@ -46,7 +45,7 @@ public class SharingImageTestState extends GameState {
 		sb.begin();
 		sb.draw(bgTex, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		sb.draw(logoTex, 0, Util.convertY((Gdx.graphics.getHeight() / 2) - (Gdx.graphics.getWidth() / 2), Gdx.graphics.getWidth()), Gdx.graphics.getWidth(), Gdx.graphics.getWidth());
-		sb.draw(pointsTex, (Gdx.graphics.getWidth() / 2) - ((4 * Level.TILE_SIZE) / 2), Util.convertY((Gdx.graphics.getHeight() - (2 * Level.TILE_SIZE)) - (int)(0.5f * Level.TILE_SIZE), Level.TILE_SIZE * 2), 4 * Level.TILE_SIZE, 2 * Level.TILE_SIZE);
+		sb.draw(pointsTex, (Gdx.graphics.getWidth() / 2) - ((4 * Level.tileSize) / 2), Util.convertY((Gdx.graphics.getHeight() - (2 * Level.tileSize)) - (int)(0.5f * Level.tileSize), Level.tileSize * 2), 4 * Level.tileSize, 2 * Level.tileSize);
 		sb.end();
 		TextRenderer.renderString("SHARING IMAGE", 0, 0, TextRenderer.calculateFittingScale("SHARING IMAGE", Gdx.graphics.getWidth()));
 		SharingImage.endRender();

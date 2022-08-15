@@ -36,15 +36,15 @@ public class DPad {
     }
 
     public void update(){
-        size = 4 * Level.TILE_SIZE;
+        size = 4 * Level.tileSize;
         int xOffset = 0;
         if(Options.rightHandedDPad){
-            xOffset += (1.5f * Level.TILE_SIZE);
+            xOffset += (1.5f * Level.tileSize);
         } else {
-            xOffset -= (1.5f * Level.TILE_SIZE);
+            xOffset -= (1.5f * Level.tileSize);
         }
         xPos = ((Gdx.graphics.getWidth() / 2) - (size / 2)) + xOffset;
-        yPos = Gdx.graphics.getHeight() - (size + Level.TILE_SIZE);
+        yPos = Gdx.graphics.getHeight() - (size + Level.tileSize);
 
         if(TouchInput.touched) {
             int relativeX = TouchInput.touchX - xPos;
@@ -85,7 +85,7 @@ public class DPad {
     }
 
     public void render(){
-        int size = 4 * Level.TILE_SIZE;
+        int size = 4 * Level.tileSize;
         sb.begin();
         sb.setColor(1.0f, 1.0f, 1.0f, Options.dpadOpacity);
         sb.draw(texture, xPos, Util.convertY(yPos, size), size, size);

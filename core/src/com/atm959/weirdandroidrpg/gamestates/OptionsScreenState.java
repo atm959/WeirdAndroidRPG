@@ -43,36 +43,36 @@ public class OptionsScreenState extends GameState {
     public OptionsScreenState(boolean startGameOnExit){
         this.startGameOnExit = startGameOnExit;
         rightHandedCheckbox = new CheckBox();
-        rightHandedCheckbox.xPos = (int)(0.5f * Level.TILE_SIZE);
-        rightHandedCheckbox.yPos = (int)(1.5f * Level.TILE_SIZE);
-        rightHandedCheckbox.size = (int)(1.5f * Level.TILE_SIZE);
+        rightHandedCheckbox.xPos = (int)(0.5f * Level.tileSize);
+        rightHandedCheckbox.yPos = (int)(1.5f * Level.tileSize);
+        rightHandedCheckbox.size = (int)(1.5f * Level.tileSize);
         rightHandedCheckbox.isChecked = Options.rightHandedDPad;
 
         dpadOpacitySlider = new Slider();
-        dpadOpacitySlider.xPos = (int)(0.5f * Level.TILE_SIZE);
-        dpadOpacitySlider.yPos = (int)(4.0f * Level.TILE_SIZE);
-        dpadOpacitySlider.width = (int)(7.0f * Level.TILE_SIZE);
-        dpadOpacitySlider.height = (int)(1.5f * Level.TILE_SIZE);
+        dpadOpacitySlider.xPos = (int)(0.5f * Level.tileSize);
+        dpadOpacitySlider.yPos = (int)(4.0f * Level.tileSize);
+        dpadOpacitySlider.width = (int)(7.0f * Level.tileSize);
+        dpadOpacitySlider.height = (int)(1.5f * Level.tileSize);
         dpadOpacitySlider.value = Options.dpadOpacity;
 
         saveButton = new Button();
-        saveButton.xPos = (int)(0.5f * Level.TILE_SIZE);
-        saveButton.yPos = Gdx.graphics.getHeight() - (3 * Level.TILE_SIZE);
-        saveButton.width = (int)(7.0f * Level.TILE_SIZE);
-        saveButton.height = (int)(1.5f * Level.TILE_SIZE);
+        saveButton.xPos = (int)(0.5f * Level.tileSize);
+        saveButton.yPos = Gdx.graphics.getHeight() - (3 * Level.tileSize);
+        saveButton.width = (int)(7.0f * Level.tileSize);
+        saveButton.height = (int)(1.5f * Level.tileSize);
 		saveButton.label = "SAVE";
 
         abortButton = new Button();
-        abortButton.xPos = (int) (0.5f * Level.TILE_SIZE);
-        abortButton.width = (int) (7.0f * Level.TILE_SIZE);
-        abortButton.height = (int) (1.5f * Level.TILE_SIZE);
+        abortButton.xPos = (int) (0.5f * Level.tileSize);
+        abortButton.width = (int) (7.0f * Level.tileSize);
+        abortButton.height = (int) (1.5f * Level.tileSize);
         abortButton.yPos = saveButton.yPos - abortButton.height;
 		abortButton.label = "ABORT";
 
         showFPSAndDeltaCheckbox = new CheckBox();
-        showFPSAndDeltaCheckbox.xPos = (int)(0.5f * Level.TILE_SIZE);
-        showFPSAndDeltaCheckbox.yPos = (int)(6.0f * Level.TILE_SIZE);
-        showFPSAndDeltaCheckbox.size = (int)(1.5f * Level.TILE_SIZE);
+        showFPSAndDeltaCheckbox.xPos = (int)(0.5f * Level.tileSize);
+        showFPSAndDeltaCheckbox.yPos = (int)(6.0f * Level.tileSize);
+        showFPSAndDeltaCheckbox.size = (int)(1.5f * Level.tileSize);
         showFPSAndDeltaCheckbox.isChecked = Options.showFPSAndDelta;
 
         rightHanded = Options.rightHandedDPad;
@@ -98,12 +98,12 @@ public class OptionsScreenState extends GameState {
         }
         bgSB.end();
 
-        TextRenderer.renderString(OPTIONS_STRING, (int)(0.5f * Level.TILE_SIZE), 0, Level.TILE_SIZE);
-        TextRenderer.renderString(LEFT_HANDED_STRING, rightHandedCheckbox.xPos + rightHandedCheckbox.size + (int)(0.5f * Level.TILE_SIZE), rightHandedCheckbox.yPos + (int)(0.25 * Level.TILE_SIZE), TextRenderer.TEXTSCALE_SMALL);
-        TextRenderer.renderString(DPAD_STRING, rightHandedCheckbox.xPos + rightHandedCheckbox.size + (int)(0.5f * Level.TILE_SIZE) + (3 * TextRenderer.TEXTSCALE_SMALL), rightHandedCheckbox.yPos + (int)(0.75 * Level.TILE_SIZE), TextRenderer.TEXTSCALE_SMALL);
+        TextRenderer.renderString(OPTIONS_STRING, (int)(0.5f * Level.tileSize), 0, Level.tileSize);
+        TextRenderer.renderString(LEFT_HANDED_STRING, rightHandedCheckbox.xPos + rightHandedCheckbox.size + (int)(0.5f * Level.tileSize), rightHandedCheckbox.yPos + (int)(0.25 * Level.tileSize), TextRenderer.TEXTSCALE_SMALL);
+        TextRenderer.renderString(DPAD_STRING, rightHandedCheckbox.xPos + rightHandedCheckbox.size + (int)(0.5f * Level.tileSize) + (3 * TextRenderer.TEXTSCALE_SMALL), rightHandedCheckbox.yPos + (int)(0.75 * Level.tileSize), TextRenderer.TEXTSCALE_SMALL);
         TextRenderer.renderString(DPAD_OPACITY_STRING, dpadOpacitySlider.xPos + (int)(0.5f * TextRenderer.TEXTSCALE_MEDIUM), dpadOpacitySlider.yPos - TextRenderer.TEXTSCALE_MEDIUM, TextRenderer.TEXTSCALE_MEDIUM);
-        TextRenderer.renderString(SHOW_FPS_STRING, (int)(showFPSAndDeltaCheckbox.xPos + showFPSAndDeltaCheckbox.size + (int)(0.5f * Level.TILE_SIZE) + (1.5f * TextRenderer.TEXTSCALE_SMALL)), showFPSAndDeltaCheckbox.yPos + (int)(0.25 * Level.TILE_SIZE), TextRenderer.TEXTSCALE_SMALL);
-        TextRenderer.renderString(AND_DELTA_STRING, (int)(showFPSAndDeltaCheckbox.xPos + showFPSAndDeltaCheckbox.size + (int)(0.5f * Level.TILE_SIZE) + TextRenderer.TEXTSCALE_SMALL), showFPSAndDeltaCheckbox.yPos + (int)(0.75 * Level.TILE_SIZE), TextRenderer.TEXTSCALE_SMALL);
+        TextRenderer.renderString(SHOW_FPS_STRING, (int)(showFPSAndDeltaCheckbox.xPos + showFPSAndDeltaCheckbox.size + (int)(0.5f * Level.tileSize) + (1.5f * TextRenderer.TEXTSCALE_SMALL)), showFPSAndDeltaCheckbox.yPos + (int)(0.25 * Level.tileSize), TextRenderer.TEXTSCALE_SMALL);
+        TextRenderer.renderString(AND_DELTA_STRING, (int)(showFPSAndDeltaCheckbox.xPos + showFPSAndDeltaCheckbox.size + (int)(0.5f * Level.tileSize) + TextRenderer.TEXTSCALE_SMALL), showFPSAndDeltaCheckbox.yPos + (int)(0.75 * Level.tileSize), TextRenderer.TEXTSCALE_SMALL);
 
         rightHandedCheckbox.update();
         rightHanded = rightHandedCheckbox.isChecked;
@@ -135,7 +135,7 @@ public class OptionsScreenState extends GameState {
         showFPSAndDeltaCheckbox.render();
 
         String dpadOpacityPercentageString = (int)(dpadOpacitySlider.value * 100.0f) + "%";
-        TextRenderer.renderString(dpadOpacityPercentageString, dpadOpacitySlider.xPos + (dpadOpacitySlider.width / 2) - ((dpadOpacityPercentageString.length() * TextRenderer.TEXTSCALE_LARGE) / 2), (int)(dpadOpacitySlider.yPos + 0.35f * Level.TILE_SIZE), TextRenderer.TEXTSCALE_LARGE);
+        TextRenderer.renderString(dpadOpacityPercentageString, dpadOpacitySlider.xPos + (dpadOpacitySlider.width / 2) - ((dpadOpacityPercentageString.length() * TextRenderer.TEXTSCALE_LARGE) / 2), (int)(dpadOpacitySlider.yPos + 0.35f * Level.tileSize), TextRenderer.TEXTSCALE_LARGE);
         String saveString = "SAVE";
         if(startGameOnExit) saveString += " & PLAY";
         int saveScale = TextRenderer.TEXTSCALE_LARGE;

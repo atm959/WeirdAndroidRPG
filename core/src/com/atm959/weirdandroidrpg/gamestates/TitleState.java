@@ -36,23 +36,23 @@ public class TitleState extends GameState {
         BGM.playSong(BGM.SONG_TITLE);
 
         startButton = new Button();
-        startButton.xPos = (int)(0.5f * Level.TILE_SIZE);
-        startButton.yPos = Gdx.graphics.getHeight() - (3 * Level.TILE_SIZE);
-        startButton.width = (int)(7.0f * Level.TILE_SIZE);
-        startButton.height = (int)(1.5f * Level.TILE_SIZE);
+        startButton.xPos = (int)(0.5f * Level.tileSize);
+        startButton.yPos = Gdx.graphics.getHeight() - (3 * Level.tileSize);
+        startButton.width = (int)(7.0f * Level.tileSize);
+        startButton.height = (int)(1.5f * Level.tileSize);
 		startButton.label = "PLAY";
 
         optionsButton = new Button();
-        optionsButton.xPos = (int)(0.5f * Level.TILE_SIZE);
-        optionsButton.width = (int)(7.0f * Level.TILE_SIZE);
-        optionsButton.height = (int)(1.5f * Level.TILE_SIZE);
+        optionsButton.xPos = (int)(0.5f * Level.tileSize);
+        optionsButton.width = (int)(7.0f * Level.tileSize);
+        optionsButton.height = (int)(1.5f * Level.tileSize);
         optionsButton.yPos = startButton.yPos - optionsButton.height;
 		optionsButton.label = "OPTIONS";
 
         creditsButton = new Button();
-        creditsButton.xPos = (int)(0.5f * Level.TILE_SIZE);
-        creditsButton.width = (int)(7.0f * Level.TILE_SIZE);
-        creditsButton.height = (int)(1.5f * Level.TILE_SIZE);
+        creditsButton.xPos = (int)(0.5f * Level.tileSize);
+        creditsButton.width = (int)(7.0f * Level.tileSize);
+        creditsButton.height = (int)(1.5f * Level.tileSize);
         creditsButton.yPos = optionsButton.yPos - creditsButton.height;
 		creditsButton.label = "CREDITS";
 

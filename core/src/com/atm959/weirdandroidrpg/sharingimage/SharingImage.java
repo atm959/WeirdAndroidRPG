@@ -31,7 +31,6 @@ public class SharingImage {
 	}
 
 	public static void endRender(){
-		pixelData = ScreenUtils.getFrameBufferPixels(true);
 		m_fbo.end();
 	}
 
@@ -44,6 +43,10 @@ public class SharingImage {
 	}
 
 	public static void share(String text){
+		m_fbo.begin();
+		pixelData = ScreenUtils.getFrameBufferPixels(true);
+		m_fbo.end();
+
 		Pixmap pixmap = new Pixmap(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Pixmap.Format.RGBA8888);
 		ByteBuffer pixels = pixmap.getPixels();
 		pixels.clear();
