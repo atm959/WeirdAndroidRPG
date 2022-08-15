@@ -3,6 +3,8 @@ package com.atm959.weirdandroidrpg.script;
 /**
  * Created by atm959 on 4/9/2022.
  */
+
+//Script executor register names and offsets
 public class ScriptRegisterOffsets {
     //General-purpose registers
     public static final byte R0 = 0x00;

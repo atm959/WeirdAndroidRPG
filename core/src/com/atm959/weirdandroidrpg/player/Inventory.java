@@ -5,6 +5,8 @@ import com.atm959.weirdandroidrpg.items.items.Item;
 /**
  * Created by atm959 on 3/24/2022.
  */
+
+//INCOMPLETE: The player's inventory
 public class Inventory {
     public Item[] mainSlots;
     public Item[] weaponSlots;

@@ -5,13 +5,16 @@ import com.badlogic.gdx.Gdx;
 /**
  * Created by atm959 on 4/9/2022.
  */
+
+//A script executor, built like a virtual machine
 public class ScriptExecutor {
-    public int[] registers;
-    public int[] stack;
-    public int[] memoryBlock;
+    public int[] registers; //The different registers of the virtual machine
+    public int[] stack; //The stack of the virtual machine
+    public int[] memoryBlock; //General-purpose memory
 
-    public byte[] program;
+    public byte[] program; //The program's bytecode, like a "ROM"
 
+	//Initialize the script executor
     public ScriptExecutor(byte[] script){
         registers = new int[0x25];
         stack = new int[0x80];
@@ -19,6 +22,7 @@ public class ScriptExecutor {
         this.program = script;
     }
 
+	//Functions to manipulate the program counter
     public int getPC(){
         return registers[ScriptRegisterOffsets.PC];
     }
@@ -29,11 +33,14 @@ public class ScriptExecutor {
         registers[ScriptRegisterOffsets.PC]++;
     }
 
+	//Get the next byte from the program
     public byte getNextByte(){
         byte val = program[getPC()];
         incrementPC();
         return val;
     }
+
+	//Get the next integer from the program
     public int getNextInt(){
         byte val1 = program[getPC()];
         incrementPC();
@@ -46,6 +53,7 @@ public class ScriptExecutor {
         return (int)((val1 << 24) | (val2 << 16) | (val3 << 8) | val4);
     }
 
+	//Functions to manipulate registers
     public int getRegisterValue(byte registerNum){
         return registers[registerNum];
     }
@@ -56,6 +64,7 @@ public class ScriptExecutor {
         registers[registerNum]++;
     }
 
+	//Functions to manipulate memory
     public int getMemoryValue(byte offset){
         return memoryBlock[offset];
     }
@@ -66,12 +75,14 @@ public class ScriptExecutor {
         memoryBlock[offset]++;
     }
 
+	//Dump a small bit of the virtual machine's state
     public void dumpState(){
         Gdx.app.log("SCRIPT_EXECUTOR", "PC: " + Integer.toHexString(getPC()));
         Gdx.app.log("SCRIPT_EXECUTOR", "R00: " + Integer.toHexString(getRegisterValue((byte)0x00)));
         Gdx.app.log("SCRIPT_EXECUTOR", "M000: " + Integer.toHexString(getMemoryValue((byte)0x00)));
     }
 
+	//Execute the next instruction
     public void executeNext(){
         byte instructionGroup = getNextByte();
         //Gdx.app.log("SCRIPT_EXECUTOR", "Instruction Group: " + instructionGroup);

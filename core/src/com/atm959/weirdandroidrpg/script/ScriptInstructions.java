@@ -3,6 +3,8 @@ package com.atm959.weirdandroidrpg.script;
 /**
  * Created by atm959 on 4/9/2022.
  */
+
+//Different instructions that the script executor can execute
 public class ScriptInstructions {
     public static final byte INSTRUCTIONGROUP_DEBUG = 0x00;
     public static final byte INSTRUCTION_NOP = 0x00;
