@@ -14,6 +14,8 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 /**
  * Created by atm959 on 3/23/2022.
  */
+
+//TODO: Continue commenting from this point tomorrow
 public class Level {
     public static int tileSize;
 

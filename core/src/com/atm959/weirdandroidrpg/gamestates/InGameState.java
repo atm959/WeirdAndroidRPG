@@ -194,6 +194,7 @@ public class InGameState extends GameState {
 
     @Override
     public void dispose(){
+		npcRenderer.dispose();
         level.dispose();
         player.dispose();
         dPad.dispose();

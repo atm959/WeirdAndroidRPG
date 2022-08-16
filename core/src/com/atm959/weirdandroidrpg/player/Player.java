@@ -68,53 +68,74 @@ public class Player {
             }
         }
 
-		//TODO: Resume commenting from this point tomorrow
+		//Check for collision with a solid tile in the X-velocity direction
         if(level.getTile(xPos + velX, yPos).isSolid){
-            velX = 0;
+            //If so, reset the X velocity to 0. The player won't move in the X direction.
+			velX = 0;
             playerMovedX = false;
         }
+
+		//Check for collision with a solid tile in the Y-velocity direction
         if(level.getTile(xPos, yPos + velY).isSolid){
+			//If so, reset the Y velocity to 0. The player won't move in the Y direction.
             velY = 0;
             playerMovedY = false;
         }
+
+		//Add the velocity to the player's position
         xPos += velX;
         yPos += velY;
+
+		//Check for collision with a solid tile where the player is
         if(level.getTile(xPos, yPos).isSolid){
+			//If so, reset the player's position to the old position. The player won't move.
             xPos = oldX;
             yPos = oldY;
             playerMovedX = false;
             playerMovedY = false;
         }
 
+		//Has the player moved?
         if(playerMovedX || playerMovedY) {
-            level.getTile(oldX, oldY).onPlayerWalkOutOf();
-            level.getTile(xPos, yPos).onPlayerWalkInto();
+			//If so:
+            level.getTile(oldX, oldY).onPlayerWalkOutOf(); //Tell the tile they were in that it was stepped out of
+            level.getTile(xPos, yPos).onPlayerWalkInto(); //Tell the tile they are in now that it was stepped into
 
+			//Loop through the NPCs and tell them that the player moved
             for(int i = 0; i < loadedNPCs.length; i++){
                 loadedNPCs[i].onPlayerTakeStep(this, loadedNPCs, level);
             }
         }
     }
 
+	//Executed every frame
     public void update(Level level){
+		//Calculate the player's on-screen position
         int onScreenX = (xPos * Level.tileSize) - level.scrollX;
         int onScreenY = (yPos * Level.tileSize) - level.scrollY;
-        int numTilesY = Gdx.graphics.getHeight() / Level.tileSize;
 
+		//Calculate the amount of tiles that fit in the height of the screen
+		int numTilesY = Gdx.graphics.getHeight() / Level.tileSize;
+
+		//If the player is too close to the edge of the screen, scroll the level
         if(onScreenX < (3 * Level.tileSize)) level.scrollX -= (SCROLL_SPEED * Time.deltaTime);
         if((onScreenX + Level.tileSize) > (5 * Level.tileSize)) level.scrollX += (SCROLL_SPEED * Time.deltaTime);
         if(onScreenY < (((numTilesY / 2) - 2) * Level.tileSize)) level.scrollY -= (SCROLL_SPEED * Time.deltaTime);
         if((onScreenY + Level.tileSize) > (((numTilesY / 2) + 2) * Level.tileSize)) level.scrollY += (SCROLL_SPEED * Time.deltaTime);
     }
 
+	//Render the player
     public void render(Level level){
-        sb.begin();
+        sb.begin(); //Begin the sprite batch
+
+		//Draw the player
         sb.draw(texture, (xPos * Level.tileSize) - level.scrollX, Util.convertY((yPos * Level.tileSize) - level.scrollY, Level.tileSize), Level.tileSize, Level.tileSize);
-        sb.end();
+
+		sb.end(); //End the sprite batch
     }
 
     public void dispose(){
-        texture.dispose();
-        sb.dispose();
+        texture.dispose(); //Dispose of the player texture
+        sb.dispose(); //Dispose of the sprite batch
     }
 }
