@@ -76,7 +76,7 @@ public class TitleState extends GameState {
         }
         creditsButton.update();
         if(creditsButton.isPressed){
-			StateManager.pushState(new SharingImageTestState());
+			StateManager.pushState(new ServerConnectionTestState());
 		}
 
         bgOffsetX += 0.4f * Time.deltaTime;

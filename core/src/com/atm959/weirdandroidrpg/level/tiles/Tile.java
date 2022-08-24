@@ -16,7 +16,9 @@ public class Tile implements Serializable {
         TILE_TYPES.add(new DoorTile());
         TILE_TYPES.add(new DownLadderTile());
         TILE_TYPES.add(new UpLadderTile());
-    }
+		TILE_TYPES.add(new FloorTile());
+    	TILE_TYPES.get(6).atlasID = 5;
+	}
 
     public int atlasID = 0;
     public boolean isSolid = false;

@@ -8,6 +8,7 @@ import com.atm959.weirdandroidrpg.level.Level;
 import com.atm959.weirdandroidrpg.level.tiles.Tile;
 import com.atm959.weirdandroidrpg.npc.npcs.NPC;
 import com.atm959.weirdandroidrpg.savedata.Options;
+import com.atm959.weirdandroidrpg.sharingimage.ImageSharingAPI;
 import com.atm959.weirdandroidrpg.sharingimage.SharingImage;
 import com.atm959.weirdandroidrpg.text.TextRenderer;
 import com.atm959.weirdandroidrpg.time.Time;

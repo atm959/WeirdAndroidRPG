@@ -18,6 +18,9 @@ public class TextRenderer {
     private static SpriteBatch sb; //The SpriteBatch that will be used to render the text
     private static Texture fontTex; //The font texture atlas
 
+	public static float lastScale;
+	public static float lastY;
+
     public static void init(){
         sb = new SpriteBatch(); //Initialize the SpriteBatch
         fontTex = new Texture("ui/font.png"); //Load the font texture
@@ -36,6 +39,9 @@ public class TextRenderer {
         }
 
         sb.end(); //End the sprite batch
+
+		lastScale = scale;
+		lastY = y;
     }
 
 	public static void renderString(String s, float x, float y, float scale, float r, float g, float b, float a){
@@ -56,6 +62,9 @@ public class TextRenderer {
 		sb.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 		sb.end(); //End the sprite batch
+
+		lastScale = scale;
+		lastY = y;
 	}
 
 	//Calculate a centered X position inside a container based on the scale and string length
@@ -77,4 +86,12 @@ public class TextRenderer {
         sb.dispose(); //Dispose of the sprite batch
         fontTex.dispose(); //Dispose of the font texture
     }
+
+	public static float getLastScale(){
+		return lastScale;
+	}
+
+	public static float getNextLineY(){
+		return lastY + lastScale;
+	}
 }

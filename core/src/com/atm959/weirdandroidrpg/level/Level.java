@@ -15,21 +15,22 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
  * Created by atm959 on 3/23/2022.
  */
 
-//TODO: Continue commenting from this point tomorrow
+//The level class
 public class Level {
-    public static int tileSize;
+    public static int tileSize; //The size of the tiles on screen, in pixels
 
-    public int scrollX = 0, scrollY = 0;
-    public Tile[][] tiles;
+    public int scrollX = 0, scrollY = 0; //The level scroll position
+    public Tile[][] tiles; //The tiles that make up the level
 
-    private Texture tileset;
-    private SpriteBatch sb;
+    private Texture tileset; //The level tileset texture
+    private SpriteBatch sb; //The sprite batch that will be used to render the level
 
+	//Initialize the level
     public Level(){
+		//Load the level from a Tiled level file; will be replaced with something else later
         TiledMap tiledMap = new TmxMapLoader().load("level/testmap.tmx");
         MapLayers mapLayers =  tiledMap.getLayers();
         TiledMapTileLayer tiledMapTileLayer = (TiledMapTileLayer) mapLayers.get(0);
-
         tiles = new Tile[64][64];
         for(int x = 0; x < 64; x++){
             for(int y = 0; y < 64; y++){
@@ -43,33 +44,47 @@ public class Level {
                 }
             }
         }
-        tileset = new Texture("level/tileset.png");
-        sb = new SpriteBatch();
+
+        tileset = new Texture("level/tileset.png"); //Load the tileset texture
+        sb = new SpriteBatch(); //Initialize the sprite batch
     }
 
+	//Called every frame
     public void update(){}
 
+	//Get a tile from the level
     public Tile getTile(int x, int y){
         return tiles[x][y];
     }
 
+	//Set a level tile
     public void setTile(int x, int y, Tile tile){
         tiles[x][y] = tile;
     }
 
+	//Render the level
     public void render(){
-        sb.begin();
+        sb.begin(); //Begin the sprite batch
+
+		//Loop through all of the tiles
         for(int x = 0; x < 64; x++){
             for(int y = 0; y < 64; y++){
-                Tile tile = tiles[x][y];
+                Tile tile = tiles[x][y]; //Get a reference to the tile
+
+				//Check if its render flag is set
                 if(tile.isRendered) {
+					//If so:
+					//Get its graphic's position in the texture atlas
                     int srcX = (tile.atlasID % 16) * 16;
                     int srcY = (tile.atlasID / 16) * 16;
+
+					//Draw it based on that
                     sb.draw(tileset, (x * tileSize) - scrollX, Util.convertY((y * tileSize) - scrollY, tileSize), tileSize, tileSize, srcX, srcY, 16, 16, false, false);
                 }
             }
         }
-        sb.end();
+
+        sb.end(); //End the sprite batch
     }
 
     public void dispose(){
