@@ -8,18 +8,19 @@ import com.atm959.weirdandroidrpg.npc.npcs.NPC;
 
 //An enemy test NPC
 public class TestEnemyNPC extends NPC {
-    //Constructor
-	public TestEnemyNPC(){
-        this.atlasID = 2;
-        this.isEnemy = true;
-    }
+	//Constructor
+	public TestEnemyNPC() {
+		this.atlasID = 2;
+		this.isEnemy = true;
+	}
 
 	//Copy constructor
-    public TestEnemyNPC(TestEnemyNPC npc){
-        super(npc);
-    }
-    @Override
-    public TestEnemyNPC copy(){
-        return new TestEnemyNPC(this);
-    }
+	public TestEnemyNPC(TestEnemyNPC npc) {
+		super(npc);
+	}
+
+	@Override
+	public TestEnemyNPC copy() {
+		return new TestEnemyNPC(this);
+	}
 }

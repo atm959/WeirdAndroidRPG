@@ -6,39 +6,47 @@ import java.util.ArrayList;
  * Created by atm959 on 3/24/2022.
  */
 public class Item {
-    public static ArrayList<Item> ITEM_TYPES;
-    public static void InitItemTypes(){
-        ITEM_TYPES = new ArrayList<>();
-        ITEM_TYPES.add(new NothingItem());
-        ITEM_TYPES.add(new SwordItem());
-        ITEM_TYPES.add(new LevelPlusItem());
-        ITEM_TYPES.add(new CrystalItem());
-    }
+	public static ArrayList<Item> ITEM_TYPES;
+	public int atlasID = 0;
+	public int xPos = 0, yPos = 0;
+	public boolean isRendered = true;
+	public boolean isWeapon = false;
+	public int weaponLevel = 0;
+	public float durability = 0.0f;
+	public Item() {
+	}
 
-    public int atlasID = 0;
-    public int xPos = 0, yPos = 0;
-    public boolean isRendered = true;
+	public Item(Item item) {
+		this.atlasID = item.atlasID;
+		this.xPos = item.xPos;
+		this.yPos = item.yPos;
+		this.isRendered = item.isRendered;
+		this.isWeapon = item.isWeapon;
+		this.weaponLevel = item.weaponLevel;
+		this.durability = item.durability;
+	}
 
-    public boolean isWeapon = false;
-    public int weaponLevel = 0;
-    public float durability = 0.0f;
+	public static void InitItemTypes() {
+		ITEM_TYPES = new ArrayList<>();
+		ITEM_TYPES.add(new NothingItem());
+		ITEM_TYPES.add(new SwordItem());
+		ITEM_TYPES.add(new LevelPlusItem());
+		ITEM_TYPES.add(new CrystalItem());
+	}
 
-    public Item(){}
-    public void update(){}
-    public void dispose(){}
-    public void onPickup(){}
-    public void onUse(){}
+	public void update() {
+	}
 
-    public Item(Item item){
-        this.atlasID = item.atlasID;
-        this.xPos = item.xPos;
-        this.yPos = item.yPos;
-        this.isRendered = item.isRendered;
-        this.isWeapon = item.isWeapon;
-        this.weaponLevel = item.weaponLevel;
-        this.durability = item.durability;
-    }
-    public Item copy(){
-        return new Item(this);
-    }
+	public void dispose() {
+	}
+
+	public void onPickup() {
+	}
+
+	public void onUse() {
+	}
+
+	public Item copy() {
+		return new Item(this);
+	}
 }

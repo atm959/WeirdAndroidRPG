@@ -9,5 +9,5 @@ import com.badlogic.gdx.graphics.Pixmap;
 //The image sharing API interface
 //Different platforms can implement this function in different ways
 public interface ImageSharingAPI {
-	public void shareImage(String text, Pixmap image); //Share the image and accompanying text
+	void shareImage(String text, Pixmap image); //Share the image and accompanying text
 }

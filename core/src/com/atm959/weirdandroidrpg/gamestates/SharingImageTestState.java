@@ -12,14 +12,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class SharingImageTestState extends GameState {
-	private SpriteBatch sb;
-	private Button backButton;
-	private Button shareButton;
-	private Texture bgTex;
-	private Texture logoTex;
-	private Texture pointsTex;
+	private final SpriteBatch sb;
+	private final Button backButton;
+	private final Button shareButton;
+	private final Texture bgTex;
+	private final Texture logoTex;
+	private final Texture pointsTex;
 
-	public SharingImageTestState(){
+	public SharingImageTestState() {
 		sb = new SpriteBatch();
 
 		backButton = new Button("ui/menuButton.png");
@@ -39,15 +39,15 @@ public class SharingImageTestState extends GameState {
 		pointsTex = new Texture("ui/points.png");
 	}
 
-	public void run(){
+	public void run() {
 		SharingImage.beginRender();
 		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1.0f);
 		sb.begin();
 		sb.draw(bgTex, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		sb.draw(logoTex, 0, Util.convertY((Gdx.graphics.getHeight() / 2) - (Gdx.graphics.getWidth() / 2), Gdx.graphics.getWidth()), Gdx.graphics.getWidth(), Gdx.graphics.getWidth());
-		sb.draw(pointsTex, (Gdx.graphics.getWidth() / 2) - ((4 * Level.tileSize) / 2), Util.convertY((Gdx.graphics.getHeight() - (2 * Level.tileSize)) - (int)(0.5f * Level.tileSize), Level.tileSize * 2), 4 * Level.tileSize, 2 * Level.tileSize);
+		sb.draw(pointsTex, (Gdx.graphics.getWidth() / 2) - ((4 * Level.tileSize) / 2), Util.convertY((Gdx.graphics.getHeight() - (2 * Level.tileSize)) - (int) (0.5f * Level.tileSize), Level.tileSize * 2), 4 * Level.tileSize, 2 * Level.tileSize);
 		sb.end();
-		TextRenderer.renderString("SHARING IMAGE", 0, 0, TextRenderer.calculateFittingScale("SHARING IMAGE", Gdx.graphics.getWidth()));
+		TextRenderer.renderString("SHARING IMAGE", 0, 0, TextRenderer.calculateFittingScale("SHARING IMAGE", Gdx.graphics.getWidth(), false));
 		SharingImage.endRender();
 
 		TextureRegion t = SharingImage.getTextureRegion();
@@ -57,10 +57,10 @@ public class SharingImageTestState extends GameState {
 
 		backButton.update();
 		shareButton.update();
-		if(backButton.isPressed){
+		if (backButton.isPressed) {
 			StateManager.popState();
 		}
-		if(shareButton.isPressed){
+		if (shareButton.isPressed) {
 			SharingImage.share("I somehow got 352 never-changing points in Weird Android RPG. Can you somehow get more even though it's impossible???");
 		}
 
@@ -68,7 +68,7 @@ public class SharingImageTestState extends GameState {
 		shareButton.render();
 	}
 
-	public void dispose(){
+	public void dispose() {
 		sb.dispose();
 		backButton.dispose();
 		shareButton.dispose();

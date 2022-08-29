@@ -10,18 +10,18 @@ import com.badlogic.gdx.files.FileHandle;
 //The script compiler for compiling scripts into their respective bytecode
 public class ScriptCompiler {
 
-    public ScriptCompiler(){
+	public ScriptCompiler() {
 
-    }
+	}
 
 	//INCOMPLETE: Compile the script
-    public void compileScript(String scriptPath){
+	public void compileScript(String scriptPath) {
 		//For now, all of the text lines of the script are logged
-        FileHandle scriptFileHandle = Gdx.files.internal(scriptPath);
-        String[] lines = scriptFileHandle.readString().split("\n");
-        for(int i = 0; i < lines.length; i++) {
-            Gdx.app.log("COMPILE_SCRIPT", lines[i]);
-        }
-    }
+		FileHandle scriptFileHandle = Gdx.files.internal(scriptPath);
+		String[] lines = scriptFileHandle.readString().split("\n");
+		for (int i = 0; i < lines.length; i++) {
+			Gdx.app.log("COMPILE_SCRIPT", lines[i]);
+		}
+	}
 
 }

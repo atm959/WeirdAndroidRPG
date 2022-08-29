@@ -6,6 +6,7 @@ import com.atm959.weirdandroidrpg.input.TouchInput;
 import com.atm959.weirdandroidrpg.items.items.Item;
 import com.atm959.weirdandroidrpg.level.Level;
 import com.atm959.weirdandroidrpg.level.tiles.Tile;
+import com.atm959.weirdandroidrpg.net.packets.serverpacket.ServerPacket;
 import com.atm959.weirdandroidrpg.npc.npcs.NPC;
 import com.atm959.weirdandroidrpg.savedata.Options;
 import com.atm959.weirdandroidrpg.sharingimage.ImageSharingAPI;
@@ -25,12 +26,12 @@ public class Game extends ApplicationAdapter {
 	public static ImageSharingAPI imageSharingAPI; //The image sharing API
 
 	//Take the current platform's image sharing API in and set the local copy
-	public Game(ImageSharingAPI imageShareAPI){
+	public Game(ImageSharingAPI imageShareAPI) {
 		imageSharingAPI = imageShareAPI;
 	}
 
 	@Override
-	public void create () {
+	public void create() {
 		//Calculate the level tile size so the title state will have correctly-size graphical elements
 		Level.tileSize = (Gdx.graphics.getWidth() / 8);
 
@@ -42,10 +43,11 @@ public class Game extends ApplicationAdapter {
 		StateManager.pushState(new TitleState()); //Push the title screen state onto the state stack
 		TextRenderer.init(); //Init the text renderer
 		SharingImage.init(); //Init the sharing image
+		ServerPacket.InitServerPacketTypes(); //Init the server packet types
 	}
 
 	@Override
-	public void render () {
+	public void render() {
 		//Re-calculate the tile size in case the screen resolution changed
 		Level.tileSize = (Gdx.graphics.getWidth() / 8);
 
@@ -56,17 +58,17 @@ public class Game extends ApplicationAdapter {
 		StateManager.runCurrentState(); //Execute the last state on the state stack
 
 		Time.frameCount++; //Increment the frame count
-		Time.calculateFPSAndDeltaTime(); //Ca;culate the FPS and delta time
-		if (Options.showFPSAndDelta) {
+		Time.calculateFPSAndDeltaTime(); //Calculate the FPS and delta time
+		if (Options.showDebugInfo) {
 			//If the option to do so is enabled, render debug info at the bottom of the screen
-			TextRenderer.renderString("FPS: " + Time.fps, 0, Gdx.graphics.getHeight() - TextRenderer.TEXTSCALE_LARGE, TextRenderer.TEXTSCALE_LARGE);
-			TextRenderer.renderString("DELTA: " + Time.deltaTime, 0, Gdx.graphics.getHeight() - TextRenderer.TEXTSCALE_LARGE - TextRenderer.TEXTSCALE_MEDIUM, TextRenderer.TEXTSCALE_MEDIUM);
-			TextRenderer.renderString("STATES: " + StateManager.stateStack.size(), 0, Gdx.graphics.getHeight() - TextRenderer.TEXTSCALE_LARGE - TextRenderer.TEXTSCALE_MEDIUM - TextRenderer.TEXTSCALE_LARGE, TextRenderer.TEXTSCALE_LARGE);
+			TextRenderer.renderString("FPS: " + Time.fps, 0, Gdx.graphics.getHeight() - TextRenderer.TEXT_SCALE_LARGE, TextRenderer.TEXT_SCALE_LARGE);
+			TextRenderer.renderString("DELTA: " + Time.deltaTime, 0, Gdx.graphics.getHeight() - TextRenderer.TEXT_SCALE_LARGE - TextRenderer.TEXT_SCALE_MEDIUM, TextRenderer.TEXT_SCALE_MEDIUM);
+			TextRenderer.renderString("STATES: " + StateManager.stateStack.size(), 0, Gdx.graphics.getHeight() - TextRenderer.TEXT_SCALE_LARGE - TextRenderer.TEXT_SCALE_MEDIUM - TextRenderer.TEXT_SCALE_LARGE, TextRenderer.TEXT_SCALE_LARGE);
 		}
 	}
 
 	@Override
-	public void dispose () {
+	public void dispose() {
 		TextRenderer.dispose();//Dispose of the text renderer
 		StateManager.disposeAll(); //Dispose of all of the states on the state stack
 
