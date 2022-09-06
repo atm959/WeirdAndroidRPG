@@ -21,12 +21,14 @@ public class TitleState extends GameState {
 	private static final String CREATOR_TEXT = "BY ATM959";
 	private static final String PLAY_TEXT = "PLAY";
 	private static final String OPTIONS_TEXT = "OPTIONS";
-	private static final String CREDITS_TEXT = "CREDITS";
+	private static final String NET_TEST_TEXT = "NET TEST";
+	private static final String SHARING_IMAGE_TEST_TEXT = "SHARING IMAGE TEST";
 	private static final String VERSION_TEXT = "ALPHA 1, 1ST VERSIONED BUILD";
 	float bgOffsetX = 0.0f, bgOffsetY = 0.0f;
 	private final Button startButton;
 	private final Button optionsButton;
-	private final Button creditsButton;
+	private final Button netTestButton;
+	private final Button sharingImageButton;
 	private final Texture bgTex;
 	private final SpriteBatch bgSB;
 
@@ -38,21 +40,28 @@ public class TitleState extends GameState {
 		startButton.yPos = Gdx.graphics.getHeight() - (3 * Level.tileSize);
 		startButton.width = (int) (7.0f * Level.tileSize);
 		startButton.height = (int) (1.5f * Level.tileSize);
-		startButton.label = "PLAY";
+		startButton.label = PLAY_TEXT;
 
 		optionsButton = new Button();
 		optionsButton.xPos = (int) (0.5f * Level.tileSize);
 		optionsButton.width = (int) (7.0f * Level.tileSize);
 		optionsButton.height = (int) (1.5f * Level.tileSize);
 		optionsButton.yPos = startButton.yPos - optionsButton.height;
-		optionsButton.label = "OPTIONS";
+		optionsButton.label = OPTIONS_TEXT;
 
-		creditsButton = new Button();
-		creditsButton.xPos = (int) (0.5f * Level.tileSize);
-		creditsButton.width = (int) (7.0f * Level.tileSize);
-		creditsButton.height = (int) (1.5f * Level.tileSize);
-		creditsButton.yPos = optionsButton.yPos - creditsButton.height;
-		creditsButton.label = "NET TEST";
+		netTestButton = new Button();
+		netTestButton.xPos = (int) (0.5f * Level.tileSize);
+		netTestButton.width = (int) (7.0f * Level.tileSize);
+		netTestButton.height = (int) (1.5f * Level.tileSize);
+		netTestButton.yPos = optionsButton.yPos - netTestButton.height;
+		netTestButton.label = NET_TEST_TEXT;
+
+		sharingImageButton = new Button();
+		sharingImageButton.xPos = (int) (0.5f * Level.tileSize);
+		sharingImageButton.width = (int) (7.0f * Level.tileSize);
+		sharingImageButton.height = (int) (1.5f * Level.tileSize);
+		sharingImageButton.yPos = netTestButton.yPos - sharingImageButton.height;
+		sharingImageButton.label = SHARING_IMAGE_TEST_TEXT;
 
 		bgTex = new Texture("title/bg.png");
 		bgSB = new SpriteBatch();
@@ -72,9 +81,13 @@ public class TitleState extends GameState {
 		if (optionsButton.isPressed) {
 			StateManager.pushState(new OptionsScreenState(false));
 		}
-		creditsButton.update();
-		if (creditsButton.isPressed) {
+		netTestButton.update();
+		if (netTestButton.isPressed) {
 			StateManager.pushState(new ServerConnectionTestState());
+		}
+		sharingImageButton.update();
+		if(sharingImageButton.isPressed){
+			StateManager.pushState(new SharingImageTestState());
 		}
 
 		bgOffsetX += 0.4f * Time.deltaTime;
@@ -91,16 +104,26 @@ public class TitleState extends GameState {
 
 		startButton.render();
 		optionsButton.render();
-		creditsButton.render();
+		netTestButton.render();
+		sharingImageButton.render();
 
-		//Text here
+		//Render the text here
+		TextRenderer.renderStringFitting(WEIRD_TEXT, 0, 0, Gdx.graphics.getWidth());
+		TextRenderer.renderStringFitting(ANDROID_TEXT, 0, TextRenderer.getNextLineY(), Gdx.graphics.getWidth());
+		TextRenderer.renderStringFitting(RPG_TEXT, 0, TextRenderer.getNextLineY(), Gdx.graphics.getWidth());
+		TextRenderer.renderStringFitting(CREATOR_TEXT, 0, TextRenderer.getNextLineY(), Gdx.graphics.getWidth());
+
+		float verTxtScl = TextRenderer.calculateFittingScale(VERSION_TEXT, Gdx.graphics.getWidth(), false);
+		float verTxtXPos = TextRenderer.calculateCenteredXPosition(VERSION_TEXT, verTxtScl, 0, Gdx.graphics.getWidth());
+		TextRenderer.renderString(VERSION_TEXT, verTxtXPos, Gdx.graphics.getHeight() - verTxtScl, verTxtScl);
 	}
 
 	@Override
 	public void dispose() {
 		startButton.dispose();
 		optionsButton.dispose();
-		creditsButton.dispose();
+		netTestButton.dispose();
+		sharingImageButton.dispose();
 		bgTex.dispose();
 		bgSB.dispose();
 	}

@@ -66,6 +66,12 @@ public class TextRenderer {
 		lastY = y;
 	}
 
+	public static void renderStringFitting(String s, float x, float y, float containerWidth){
+		float scale = calculateFittingScale(s, containerWidth, false);
+		float xP = calculateCenteredXPosition(s, scale, x, containerWidth);
+		renderString(s, xP, y, scale);
+	}
+
 	//Calculate a centered X position inside a container based on the scale and string length
 	public static float calculateCenteredXPosition(String s, float scale, float containerX, float containerWidth) {
 		return containerX + ((containerWidth / 2.0f) - ((s.length() * scale) / 2.0f));

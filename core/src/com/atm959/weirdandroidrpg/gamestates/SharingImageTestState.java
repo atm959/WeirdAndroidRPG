@@ -47,7 +47,7 @@ public class SharingImageTestState extends GameState {
 		sb.draw(logoTex, 0, Util.convertY((Gdx.graphics.getHeight() / 2) - (Gdx.graphics.getWidth() / 2), Gdx.graphics.getWidth()), Gdx.graphics.getWidth(), Gdx.graphics.getWidth());
 		sb.draw(pointsTex, (Gdx.graphics.getWidth() / 2) - ((4 * Level.tileSize) / 2), Util.convertY((Gdx.graphics.getHeight() - (2 * Level.tileSize)) - (int) (0.5f * Level.tileSize), Level.tileSize * 2), 4 * Level.tileSize, 2 * Level.tileSize);
 		sb.end();
-		TextRenderer.renderString("SHARING IMAGE", 0, 0, TextRenderer.calculateFittingScale("SHARING IMAGE", Gdx.graphics.getWidth(), false));
+		TextRenderer.renderString("UWU OWO X3 XD", 0, 0, TextRenderer.calculateFittingScale("UWU OWO X3 XD", Gdx.graphics.getWidth(), true));
 		SharingImage.endRender();
 
 		TextureRegion t = SharingImage.getTextureRegion();
@@ -61,7 +61,7 @@ public class SharingImageTestState extends GameState {
 			StateManager.popState();
 		}
 		if (shareButton.isPressed) {
-			SharingImage.share("I somehow got 352 never-changing points in Weird Android RPG. Can you somehow get more even though it's impossible???");
+			SharingImage.share("atm959 is a big dum-dum");
 		}
 
 		backButton.render();
