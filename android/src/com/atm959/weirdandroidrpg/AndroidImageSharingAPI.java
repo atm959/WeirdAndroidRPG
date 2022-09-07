@@ -25,7 +25,7 @@ public class AndroidImageSharingAPI implements ImageSharingAPI {
 	public Context context; //Certain Android API things need the application context
 
 	//This constructor sets the local instance of the context
-	public AndroidImageSharingAPI(Context appContext) {
+	public AndroidImageSharingAPI(Context appContext){
 		context = appContext;
 	}
 

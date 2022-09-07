@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 public class ServerPacket {
 	public static ArrayList<ServerPacket> SERVER_PACKET_TYPES;
-	public byte packetID;
+	public static void InitServerPacketTypes(){
 
+<<<<<<< HEAD
 	public ServerPacket() {
 		packetID = -1;
 	}
@@ -14,5 +15,7 @@ public class ServerPacket {
 		SERVER_PACKET_TYPES = new ArrayList<>();
 		SERVER_PACKET_TYPES.add(new JoinAcknowledgementPacket());
 		SERVER_PACKET_TYPES.add(new HeartbeatAcknowledgementPacket());
+=======
+>>>>>>> parent of e187758 (Add a heartbeat system to the server connection)
 	}
 }

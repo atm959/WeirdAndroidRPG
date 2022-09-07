@@ -8,19 +8,18 @@ import com.atm959.weirdandroidrpg.npc.npcs.NPC;
 
 //A frowning enemy test NPC
 public class FrownEnemyNPC extends NPC {
-	//Constructor
-	public FrownEnemyNPC() {
-		this.atlasID = 1;
-		this.isEnemy = true;
-	}
+    //Constructor
+	public FrownEnemyNPC(){
+        this.atlasID = 1;
+        this.isEnemy = true;
+    }
 
 	//Copy constructor
-	public FrownEnemyNPC(FrownEnemyNPC npc) {
-		super(npc);
-	}
-
-	@Override
-	public FrownEnemyNPC copy() {
-		return new FrownEnemyNPC(this);
-	}
+    public FrownEnemyNPC(FrownEnemyNPC npc){
+        super(npc);
+    }
+    @Override
+    public FrownEnemyNPC copy(){
+        return new FrownEnemyNPC(this);
+    }
 }

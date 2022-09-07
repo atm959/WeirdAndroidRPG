@@ -9,17 +9,16 @@ import com.atm959.weirdandroidrpg.npc.npcs.NPC;
 //A friendly test NPC
 public class SmileFriendlyNPC extends NPC {
 	//Constructor
-	public SmileFriendlyNPC() {
-		this.atlasID = 0;
-	}
+    public SmileFriendlyNPC(){
+        this.atlasID = 0;
+    }
 
 	//Copy contructor
-	public SmileFriendlyNPC(SmileFriendlyNPC npc) {
-		super(npc);
-	}
-
-	@Override
-	public SmileFriendlyNPC copy() {
-		return new SmileFriendlyNPC(this);
-	}
+    public SmileFriendlyNPC(SmileFriendlyNPC npc){
+        super(npc);
+    }
+    @Override
+    public SmileFriendlyNPC copy(){
+        return new SmileFriendlyNPC(this);
+    }
 }

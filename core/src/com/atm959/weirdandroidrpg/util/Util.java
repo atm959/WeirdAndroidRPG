@@ -10,7 +10,7 @@ import com.badlogic.gdx.Gdx;
 public class Util {
 
 	//Convert a normal Y coordinate to the "flipped" LibGDX Y coordinate
-	public static int convertY(int y, int spriteHeight) {
-		return (Gdx.graphics.getHeight() - spriteHeight) - y;
-	}
+    public static int convertY(int y, int spriteHeight){
+        return (Gdx.graphics.getHeight() - spriteHeight) - y;
+    }
 }

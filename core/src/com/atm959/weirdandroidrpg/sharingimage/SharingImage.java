@@ -3,6 +3,8 @@ package com.atm959.weirdandroidrpg.sharingimage;
 import com.atm959.weirdandroidrpg.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -21,29 +23,29 @@ public class SharingImage {
 	//Only used if you want to render the sharing image to the screen
 	public static TextureRegion m_fboRegion;
 
-	public static void init() {
+	public static void init(){
 		m_fbo = new FrameBuffer(Pixmap.Format.RGB565, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
 		m_fboRegion = new TextureRegion(m_fbo.getColorBufferTexture());
 		m_fboRegion.flip(false, true);
 	}
 
 	//Bind the framebuffer and start rendering to it
-	public static void beginRender() {
+	public static void beginRender(){
 		m_fbo.begin();
 	}
 
 	//Unbind the framebuffer and stop rendering to it
-	public static void endRender() {
+	public static void endRender(){
 		m_fbo.end();
 	}
 
 	//Get the framebuffer's texture region, if you want to render it to the screen
-	public static TextureRegion getTextureRegion() {
+	public static TextureRegion getTextureRegion(){
 		return m_fboRegion;
 	}
 
 	//Share the image
-	public static void share(String text) {
+	public static void share(String text){
 		m_fbo.begin(); //Bind the framebuffer
 		pixelData = ScreenUtils.getFrameBufferPixels(true); //Copy its pixels into pixelData
 		m_fbo.end(); //Unbind the framebuffer
@@ -62,7 +64,7 @@ public class SharingImage {
 		pixmap.dispose();
 	}
 
-	public static void dispose() {
+	public static void dispose(){
 		m_fbo.dispose(); //Dispose of the framebuffer
 	}
 }

@@ -11,88 +11,89 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * Created by atm959 on 3/24/2022.
  */
 public class DPad {
-	public static final int UP = 0;
-	public static final int DOWN = 1;
-	public static final int LEFT = 2;
-	public static final int RIGHT = 3;
-	public static final int UP_LEFT = 4;
-	public static final int UP_RIGHT = 5;
-	public static final int DOWN_LEFT = 6;
-	public static final int DOWN_RIGHT = 7;
-	public int xPos, yPos;
-	public int size;
-	public boolean directionIsPressed = false;
-	public boolean[] touched;
-	private final Texture texture;
-	private final SpriteBatch sb;
+    public static final int UP = 0;
+    public static final int DOWN = 1;
+    public static final int LEFT = 2;
+    public static final int RIGHT = 3;
+    public static final int UP_LEFT = 4;
+    public static final int UP_RIGHT = 5;
+    public static final int DOWN_LEFT = 6;
+    public static final int DOWN_RIGHT = 7;
 
-	public DPad() {
-		texture = new Texture("ui/dpad.png");
-		sb = new SpriteBatch();
+    private Texture texture;
+    private SpriteBatch sb;
+    public int xPos, yPos;
+    public int size;
 
-		touched = new boolean[8];
-	}
+    public boolean directionIsPressed = false;
+    public boolean[] touched;
 
-	public void update() {
-		size = 4 * Level.tileSize;
-		int xOffset = 0;
-		if (Options.rightHandedDPad) {
-			xOffset += (1.5f * Level.tileSize);
-		} else {
-			xOffset -= (1.5f * Level.tileSize);
-		}
-		xPos = ((Gdx.graphics.getWidth() / 2) - (size / 2)) + xOffset;
-		yPos = Gdx.graphics.getHeight() - (size + Level.tileSize);
+    public DPad(){
+        texture = new Texture("ui/dpad.png");
+        sb = new SpriteBatch();
 
-		if (TouchInput.touched) {
-			int relativeX = TouchInput.touchX - xPos;
-			int relativeY = TouchInput.touchY - yPos;
+        touched = new boolean[8];
+    }
 
-			//If the touch is not inside the D-Pad area, abort
-			if ((relativeX < 0) || (relativeX > size) || (relativeY < 0) || (relativeY > size))
-				return;
+    public void update(){
+        size = 4 * Level.tileSize;
+        int xOffset = 0;
+        if(Options.rightHandedDPad){
+            xOffset += (1.5f * Level.tileSize);
+        } else {
+            xOffset -= (1.5f * Level.tileSize);
+        }
+        xPos = ((Gdx.graphics.getWidth() / 2) - (size / 2)) + xOffset;
+        yPos = Gdx.graphics.getHeight() - (size + Level.tileSize);
 
-			int scaleFactor = size / 48;
-			int normalizedX = relativeX / scaleFactor;
-			int normalizedY = relativeY / scaleFactor;
+        if(TouchInput.touched) {
+            int relativeX = TouchInput.touchX - xPos;
+            int relativeY = TouchInput.touchY - yPos;
 
-			final int[] buttonXPoses = {
-				16, 16, 0, 32, 0, 32, 0, 32
-			};
-			final int[] buttonYPoses = {
-				0, 32, 16, 16, 0, 0, 32, 32
-			};
-			for (int i = 0; i < 8; i++) {
-				int leftX = buttonXPoses[i];
-				int rightX = buttonXPoses[i] + 16;
-				int topX = buttonYPoses[i];
-				int bottomX = buttonYPoses[i] + 16;
+            //If the touch is not inside the D-Pad area, abort
+            if((relativeX < 0) || (relativeX > size) || (relativeY < 0) || (relativeY > size)) return;
 
-				if ((normalizedX >= leftX) && (normalizedX < rightX)) {
-					if ((normalizedY >= topX) && (normalizedY < bottomX)) {
-						touched[i] = true;
-						directionIsPressed = true;
-					}
-				}
-			}
-		} else {
-			directionIsPressed = false;
-			for (int i = 0; i < 8; i++) {
-				touched[i] = false;
-			}
-		}
-	}
+            int scaleFactor = size / 48;
+            int normalizedX = relativeX / scaleFactor;
+            int normalizedY = relativeY / scaleFactor;
 
-	public void render() {
-		int size = 4 * Level.tileSize;
-		sb.begin();
-		sb.setColor(1.0f, 1.0f, 1.0f, Options.dpadOpacity);
-		sb.draw(texture, xPos, Util.convertY(yPos, size), size, size);
-		sb.end();
-	}
+            final int[] buttonXPoses = {
+                    16, 16, 0, 32, 0, 32, 0, 32
+            };
+            final int[] buttonYPoses = {
+                    0, 32, 16, 16, 0, 0, 32, 32
+            };
+            for (int i = 0; i < 8; i++) {
+                int leftX = buttonXPoses[i];
+                int rightX = buttonXPoses[i] + 16;
+                int topX = buttonYPoses[i];
+                int bottomX = buttonYPoses[i] + 16;
 
-	public void dispose() {
-		texture.dispose();
-		sb.dispose();
-	}
+                if((normalizedX >= leftX) && (normalizedX < rightX)){
+                    if((normalizedY >= topX) && (normalizedY < bottomX)){
+                        touched[i] = true;
+                        directionIsPressed = true;
+                    }
+                }
+            }
+        } else {
+            directionIsPressed = false;
+            for (int i = 0; i < 8; i++) {
+                touched[i] = false;
+            }
+        }
+    }
+
+    public void render(){
+        int size = 4 * Level.tileSize;
+        sb.begin();
+        sb.setColor(1.0f, 1.0f, 1.0f, Options.dpadOpacity);
+        sb.draw(texture, xPos, Util.convertY(yPos, size), size, size);
+        sb.end();
+    }
+
+    public void dispose(){
+        texture.dispose();
+        sb.dispose();
+    }
 }
