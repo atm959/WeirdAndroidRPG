@@ -32,7 +32,7 @@ public class NPC {
 		this.isEnemy = npc.isEnemy;
 	}
 
-	public static void InitNPCTypes() {
+	public static void initNPCTypes() {
 		//Initialize the default NPC ID-lookup table
 		NPC_TYPES = new ArrayList<>();
 		NPC_TYPES.add(new NothingNPC());

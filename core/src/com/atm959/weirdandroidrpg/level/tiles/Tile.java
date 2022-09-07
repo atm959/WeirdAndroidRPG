@@ -20,7 +20,7 @@ public class Tile implements Serializable {
 		this.isRendered = tile.isRendered;
 	}
 
-	public static void InitTileTypes() {
+	public static void initTileTypes() {
 		TILE_TYPES = new ArrayList<>();
 		TILE_TYPES.add(new AirTile());
 		TILE_TYPES.add(new FloorTile());

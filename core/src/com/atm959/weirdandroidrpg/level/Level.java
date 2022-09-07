@@ -1,6 +1,7 @@
 package com.atm959.weirdandroidrpg.level;
 
 import com.atm959.weirdandroidrpg.level.tiles.AirTile;
+import com.atm959.weirdandroidrpg.level.tiles.FloorTile;
 import com.atm959.weirdandroidrpg.level.tiles.Tile;
 import com.atm959.weirdandroidrpg.util.Util;
 import com.badlogic.gdx.graphics.Texture;
@@ -39,6 +40,10 @@ public class Level {
 					TiledMapTile tile = cell.getTile();
 					int tileID = tile.getId();
 					tiles[x][y] = Tile.TILE_TYPES.get(tileID).copy();
+					if(tiles[x][y] instanceof FloorTile){
+						double r = Math.random();
+						if(r > 0.5d) tiles[x][y].atlasID = 7;
+					}
 				} else {
 					tiles[x][y] = new AirTile();
 				}

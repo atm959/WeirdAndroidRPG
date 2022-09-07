@@ -10,7 +10,7 @@ public class ServerPacket {
 		packetID = -1;
 	}
 
-	public static void InitServerPacketTypes() {
+	public static void initServerPacketTypes() {
 		SERVER_PACKET_TYPES = new ArrayList<>();
 		SERVER_PACKET_TYPES.add(new JoinAcknowledgementPacket());
 		SERVER_PACKET_TYPES.add(new HeartbeatAcknowledgementPacket());

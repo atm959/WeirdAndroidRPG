@@ -36,14 +36,14 @@ public class Game extends ApplicationAdapter {
 		Level.tileSize = (Gdx.graphics.getWidth() / 8);
 
 		Options.load(); //Load the options
-		Tile.InitTileTypes(); //Init the default tile types
-		Item.InitItemTypes(); //Init the default item types
-		NPC.InitNPCTypes(); //Init the default NPC types
+		Tile.initTileTypes(); //Init the default tile types
+		Item.initItemTypes(); //Init the default item types
+		NPC.initNPCTypes(); //Init the default NPC types
 		StateManager.initStack(); //Init the state manager
 		StateManager.pushState(new TitleState()); //Push the title screen state onto the state stack
 		TextRenderer.init(); //Init the text renderer
 		SharingImage.init(); //Init the sharing image
-		ServerPacket.InitServerPacketTypes(); //Init the server packet types
+		ServerPacket.initServerPacketTypes(); //Init the server packet types
 	}
 
 	@Override

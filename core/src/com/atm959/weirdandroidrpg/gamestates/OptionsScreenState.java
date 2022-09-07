@@ -23,12 +23,15 @@ public class OptionsScreenState extends GameState {
 	private static final String ABORT_STRING = "ABORT";
 	private static final String SHOW_FPS_STRING = "SHOW FPS";
 	private static final String AND_DELTA_STRING = "AND DELTA";
+
 	float bgOffsetX = 0.0f, bgOffsetY = 0.0f;
+
 	private final CheckBox rightHandedCheckbox;
 	private final Slider dpadOpacitySlider;
 	private final Button saveButton;
 	private final Button abortButton;
 	private final CheckBox showFPSAndDeltaCheckbox;
+
 	private boolean rightHanded;
 	private float dpadOpacity;
 	private boolean showFPSAndDelta;

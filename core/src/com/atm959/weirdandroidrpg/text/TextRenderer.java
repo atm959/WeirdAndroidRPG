@@ -92,16 +92,16 @@ public class TextRenderer {
 		return s.length() * scale;
 	}
 
-	public static void dispose() {
-		sb.dispose(); //Dispose of the sprite batch
-		fontTex.dispose(); //Dispose of the font texture
-	}
-
 	public static float getLastScale() {
 		return lastScale;
 	}
 
 	public static float getNextLineY() {
 		return lastY + lastScale;
+	}
+
+	public static void dispose() {
+		sb.dispose(); //Dispose of the sprite batch
+		fontTex.dispose(); //Dispose of the font texture
 	}
 }

@@ -24,13 +24,15 @@ public class TitleState extends GameState {
 	private static final String NET_TEST_TEXT = "NET TEST";
 	private static final String SHARING_IMAGE_TEST_TEXT = "SHARING IMAGE TEST";
 	private static final String VERSION_TEXT = "ALPHA 1, 1ST VERSIONED BUILD";
+
 	float bgOffsetX = 0.0f, bgOffsetY = 0.0f;
+	private final Texture bgTex;
+	private final SpriteBatch bgSB;
+
 	private final Button startButton;
 	private final Button optionsButton;
 	private final Button netTestButton;
 	private final Button sharingImageButton;
-	private final Texture bgTex;
-	private final SpriteBatch bgSB;
 
 	public TitleState() {
 		BGM.playSong(BGM.SONG_TITLE);

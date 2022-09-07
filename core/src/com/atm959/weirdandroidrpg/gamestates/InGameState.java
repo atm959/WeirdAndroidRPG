@@ -80,6 +80,7 @@ public class InGameState extends GameState {
 	private final ShaderProgram shader;
 	private final Texture dudvMap;
 	private float time;
+	private boolean underwater = false;
 
 	public InGameState() {
 		BGM.playSong(BGM.SONG_IN_GAME);
@@ -156,8 +157,10 @@ public class InGameState extends GameState {
 			StateManager.replaceCurrentState(new TitleState());
 		}
 
-		m_fbo.begin();
-		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1.0f);
+		if(underwater) {
+			m_fbo.begin();
+			ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1.0f);
+		}
 		level.render();
 		itemRenderer.renderLevelItems(level.scrollX, level.scrollY, itemsOnGround);
 		npcFlippedTimer += 2.5f * Time.deltaTime;
@@ -168,17 +171,19 @@ public class InGameState extends GameState {
 		npcRenderer.setNpcsAreFlipped(npcsAreFlipped);
 		npcRenderer.renderLevelNPCs(level.scrollX, level.scrollY, npcsInLevel);
 		player.render(level);
-		m_fbo.end();
+		if(underwater) {
+			m_fbo.end();
 
-		dudvMap.bind(1);
-		Gdx.gl.glActiveTexture(Gdx.gl.GL_TEXTURE0);
+			dudvMap.bind(1);
+			Gdx.gl.glActiveTexture(Gdx.gl.GL_TEXTURE0);
 
-		sb.setShader(shader);
-		sb.begin();
-		shader.setUniformi("u_dudvMap", 1);
-		shader.setUniformf("u_time", time);
-		sb.draw(m_fboRegion, 0, Util.convertY(0, Gdx.graphics.getHeight()), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		sb.end();
+			sb.setShader(shader);
+			sb.begin();
+			shader.setUniformi("u_dudvMap", 1);
+			shader.setUniformf("u_time", time);
+			sb.draw(m_fboRegion, 0, Util.convertY(0, Gdx.graphics.getHeight()), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+			sb.end();
+		}
 
 		dPad.render();
 		mapButton.render();

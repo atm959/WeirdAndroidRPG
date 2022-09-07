@@ -26,7 +26,7 @@ public class Item {
 		this.durability = item.durability;
 	}
 
-	public static void InitItemTypes() {
+	public static void initItemTypes() {
 		ITEM_TYPES = new ArrayList<>();
 		ITEM_TYPES.add(new NothingItem());
 		ITEM_TYPES.add(new SwordItem());
