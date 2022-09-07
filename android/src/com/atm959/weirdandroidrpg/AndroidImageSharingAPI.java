@@ -8,7 +8,6 @@ import android.net.Uri;
 
 import androidx.core.content.FileProvider;
 
-import com.atm959.weirdandroidrpg.sharingimage.ImageSharingAPI;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;

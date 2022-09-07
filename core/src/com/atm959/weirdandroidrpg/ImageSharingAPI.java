@@ -1,4 +1,4 @@
-package com.atm959.weirdandroidrpg.sharingimage;
+package com.atm959.weirdandroidrpg;
 
 import com.badlogic.gdx.graphics.Pixmap;
 
