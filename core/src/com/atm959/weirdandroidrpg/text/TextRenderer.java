@@ -4,6 +4,7 @@ import com.atm959.weirdandroidrpg.util.Util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Matrix4;
 
 /**
  * Created by atm959 on 3/23/2022.
@@ -43,6 +44,38 @@ public class TextRenderer {
 		lastScale = scale;
 		lastY = y;
     }
+
+	public static void renderStringWithoutSpritebatchTranslation(String s, float scale){
+		sb.begin(); //Begin the sprite batch's composition
+
+		//Loop through the characters in the string
+		for(int i = 0; i < s.length(); i++){
+			float xPos = (i * (int)scale); //The X position on the screen of this character
+			int c = s.charAt(i) - 32; //The character code
+
+			//Draw the character
+			sb.draw(fontTex, xPos, 0, scale, scale, (c % 16) * 10, (c / 16) * 10, 10, 10, false, false);
+		}
+
+		sb.end(); //End the sprite batch
+	}
+
+	public static void renderStringWithoutSpritebatchTranslation(String s, float scale, float r, float g, float b){
+		sb.begin(); //Begin the sprite batch's composition
+		sb.setColor(r, g, b, 1.0f);
+
+		//Loop through the characters in the string
+		for(int i = 0; i < s.length(); i++){
+			float xPos = (i * (int)scale); //The X position on the screen of this character
+			int c = s.charAt(i) - 32; //The character code
+
+			//Draw the character
+			sb.draw(fontTex, xPos, 0, scale, scale, (c % 16) * 10, (c / 16) * 10, 10, 10, false, false);
+		}
+
+		sb.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		sb.end(); //End the sprite batch
+	}
 
 	public static void renderString(String s, float x, float y, float scale, float r, float g, float b, float a){
 		sb.begin(); //Begin the sprite batch's composition
@@ -99,6 +132,14 @@ public class TextRenderer {
 
 	public static float getNextLineY() {
 		return lastY + lastScale;
+	}
+
+	public static void setSpritebatchMatrix(Matrix4 mat){
+		sb.setTransformMatrix(mat);
+	}
+
+	public static void resetSpritebatchMatrix(){
+		sb.setTransformMatrix(new Matrix4());
 	}
 
     public static void dispose(){

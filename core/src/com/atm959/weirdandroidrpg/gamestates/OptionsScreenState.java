@@ -78,8 +78,8 @@ public class OptionsScreenState extends GameState {
         showFPSAndDeltaCheckbox.isChecked = Options.showDebugInfo;
 
 		playMusicCheckbox = new CheckBox();
-		playMusicCheckbox.xPos = showFPSAndDeltaCheckbox.xPos + (int)(1.5f * Level.tileSize);
-		playMusicCheckbox.yPos = (int)(6.0f * Level.tileSize);
+		playMusicCheckbox.xPos = (int)(0.5f * Level.tileSize);
+		playMusicCheckbox.yPos = showFPSAndDeltaCheckbox.yPos + (int)(1.5f * Level.tileSize);
 		playMusicCheckbox.size = (int)(1.5f * Level.tileSize);
 		playMusicCheckbox.isChecked = Options.playMusic;
 

@@ -59,7 +59,7 @@ public class Game extends ApplicationAdapter {
 		StateManager.runCurrentState(); //Execute the last state on the state stack
 
 		Time.frameCount++; //Increment the frame count
-		Time.calculateFPSAndDeltaTime(); //Ca;culate the FPS and delta time
+		Time.calculateFPSAndDeltaTime(); //Calculate the FPS and delta time
 		if (Options.showDebugInfo) {
 			//If the option to do so is enabled, render debug info at the bottom of the screen
 			TextRenderer.renderString("FPS: " + Time.fps, 0, Gdx.graphics.getHeight() - TextRenderer.TEXTSCALE_LARGE, TextRenderer.TEXTSCALE_LARGE);

@@ -33,8 +33,10 @@ public class BGM {
 	}
 
 	public static void onDisablePlayMusic(){
-		music.stop();
-		music.dispose();
+		if(music != null) {
+			music.stop();
+			music.dispose();
+		}
 	}
 
 	public static void dispose(){

@@ -6,9 +6,12 @@ import com.atm959.weirdandroidrpg.net.Server;
 import com.atm959.weirdandroidrpg.text.TextRenderer;
 import com.badlogic.gdx.Gdx;
 
+/**
+ * Created by atm959 on 8/24/2022.
+ */
 public class ServerConnectionTestState extends GameState {
-	private final Button backButton;
-	private final Server server;
+	private Button backButton;
+	private Server server;
 
 	public ServerConnectionTestState() {
 		backButton = new Button("ui/menuButton.png");
