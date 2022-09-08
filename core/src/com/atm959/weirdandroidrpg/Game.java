@@ -1,5 +1,6 @@
 package com.atm959.weirdandroidrpg;
 
+import com.atm959.weirdandroidrpg.audio.BGM;
 import com.atm959.weirdandroidrpg.gamestates.StateManager;
 import com.atm959.weirdandroidrpg.gamestates.TitleState;
 import com.atm959.weirdandroidrpg.input.TouchInput;
@@ -73,5 +74,7 @@ public class Game extends ApplicationAdapter {
 		StateManager.disposeAll(); //Dispose of all of the states on the state stack
 
 		SharingImage.dispose(); //Dispose of the sharing image
+
+		BGM.dispose();
 	}
 }

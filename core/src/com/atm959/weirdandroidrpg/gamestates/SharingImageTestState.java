@@ -34,9 +34,9 @@ public class SharingImageTestState extends GameState {
 		shareButton.width = Level.tileSize * 2;
 		shareButton.height = Level.tileSize * 2;
 
-		bgTex = new Texture("ui/rainbow.png");
-		logoTex = new Texture("ui/logo.png");
-		pointsTex = new Texture("ui/points.png");
+		bgTex = new Texture("ui/buttons.png");
+		logoTex = new Texture("ui/slider.png");
+		pointsTex = new Texture("level/tileset.png");
 	}
 
 	public void run(){

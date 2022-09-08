@@ -1,5 +1,6 @@
 package com.atm959.weirdandroidrpg.audio;
 
+import com.atm959.weirdandroidrpg.savedata.Options;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 
@@ -15,11 +16,28 @@ public class BGM {
         "level/bgm.mp3"
     };
     public static Music music;
+	private static int lastID;
 
     public static void playSong(int id){
-        if(music != null) if(music.isPlaying()) music.stop();
-        music = Gdx.audio.newMusic(Gdx.files.internal(songFiles[id]));
-        music.setLooping(true);
-        music.play();
+		if(Options.playMusic) {
+			if (music != null) if (music.isPlaying()) music.stop();
+			music = Gdx.audio.newMusic(Gdx.files.internal(songFiles[id]));
+			music.setLooping(true);
+			music.play();
+		}
+		lastID = id;
     }
+
+	public static void onEnablePlayMusic(){
+		playSong(lastID);
+	}
+
+	public static void onDisablePlayMusic(){
+		music.stop();
+		music.dispose();
+	}
+
+	public static void dispose(){
+		music.dispose();
+	}
 }
