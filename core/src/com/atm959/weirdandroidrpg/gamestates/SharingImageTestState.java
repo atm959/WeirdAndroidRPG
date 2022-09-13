@@ -26,13 +26,13 @@ public class SharingImageTestState extends GameState {
 		sb = new SpriteBatch();
 
 		backButton = new Button("ui/menuButton.png");
-		backButton.xPos = 0;
+		backButton.xPos = Gdx.graphics.getWidth() - (Level.tileSize * 2);
 		backButton.yPos = 0;
 		backButton.width = Level.tileSize * 2;
 		backButton.height = Level.tileSize * 2;
 
 		shareButton = new Button("ui/share.png");
-		shareButton.xPos = 0;
+		shareButton.xPos = Gdx.graphics.getWidth() - (Level.tileSize * 2);
 		shareButton.yPos = Level.tileSize * 2;
 		shareButton.width = Level.tileSize * 2;
 		shareButton.height = Level.tileSize * 2;
@@ -55,7 +55,7 @@ public class SharingImageTestState extends GameState {
 
 		TextureRegion t = SharingImage.getTextureRegion();
 		sb.begin();
-		sb.draw(t, Gdx.graphics.getWidth() / 2, Util.convertY(0, Gdx.graphics.getHeight() / 2), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+		sb.draw(t, 0, Util.convertY(0, Gdx.graphics.getHeight() / 2), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 		sb.end();
 
 		backButton.update();

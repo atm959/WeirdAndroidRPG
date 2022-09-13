@@ -60,23 +60,6 @@ public class TextRenderer {
 		sb.end(); //End the sprite batch
 	}
 
-	public static void renderStringWithoutSpritebatchTranslation(String s, float scale, float r, float g, float b){
-		sb.begin(); //Begin the sprite batch's composition
-		sb.setColor(r, g, b, 1.0f);
-
-		//Loop through the characters in the string
-		for(int i = 0; i < s.length(); i++){
-			float xPos = (i * (int)scale); //The X position on the screen of this character
-			int c = s.charAt(i) - 32; //The character code
-
-			//Draw the character
-			sb.draw(fontTex, xPos, 0, scale, scale, (c % 16) * 10, (c / 16) * 10, 10, 10, false, false);
-		}
-
-		sb.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		sb.end(); //End the sprite batch
-	}
-
 	public static void renderString(String s, float x, float y, float scale, float r, float g, float b, float a){
 		sb.begin(); //Begin the sprite batch's composition
 
@@ -106,6 +89,13 @@ public class TextRenderer {
 		renderString(s, xP, y, scale);
 	}
 
+	public static void renderStringFitting(String s, float x, float y, float containerWidth, float containerHeight){
+		float scale = calculateFittingScale(s, containerWidth, false);
+		float xP = calculateCenteredXPosition(s, scale, x, containerWidth);
+		float yP = calculateCenteredYPosition(scale, y, containerHeight);
+		renderString(s, xP, yP, scale);
+	}
+
 	//Calculate a centered X position inside a container based on the scale and string length
 	public static float calculateCenteredXPosition(String s, float scale, float containerX, float containerWidth) {
 		return containerX + ((containerWidth / 2.0f) - ((s.length() * scale) / 2.0f));
@@ -132,14 +122,6 @@ public class TextRenderer {
 
 	public static float getNextLineY() {
 		return lastY + lastScale;
-	}
-
-	public static void setSpritebatchMatrix(Matrix4 mat){
-		sb.setTransformMatrix(mat);
-	}
-
-	public static void resetSpritebatchMatrix(){
-		sb.setTransformMatrix(new Matrix4());
 	}
 
     public static void dispose(){

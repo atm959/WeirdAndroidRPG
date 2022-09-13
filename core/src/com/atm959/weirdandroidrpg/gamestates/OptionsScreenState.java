@@ -18,12 +18,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class OptionsScreenState extends GameState {
     private static final String OPTIONS_STRING = "OPTIONS";
-    private static final String LEFT_HANDED_STRING = "RIGHT-HANDED";
-    private static final String DPAD_STRING = "D-PAD";
+    private static final String RIGHT_HANDED_D_PAD_STRING = "RIGHT-HANDED D-PAD";
     private static final String DPAD_OPACITY_STRING = "D-PAD OPACITY";
     private static final String ABORT_STRING = "ABORT";
-    private static final String SHOW_DEBUG_STRING = "SHOW DEBUG";
-    private static final String INFO_STRING = "INFO";
+    private static final String SHOW_DEBUG_INFO_STRING = "SHOW DEBUG INFO";
+	private static final String PLAY_MUSIC_STRING = "PLAY MUSIC";
 
     private CheckBox rightHandedCheckbox;
     private Slider dpadOpacitySlider;
@@ -48,8 +47,10 @@ public class OptionsScreenState extends GameState {
         rightHandedCheckbox = new CheckBox();
         rightHandedCheckbox.xPos = (int)(0.5f * Level.tileSize);
         rightHandedCheckbox.yPos = (int)(1.5f * Level.tileSize);
-        rightHandedCheckbox.size = (int)(1.5f * Level.tileSize);
+		rightHandedCheckbox.boundingBoxWidth = (int) (7.0f * Level.tileSize);
+        rightHandedCheckbox.boundingBoxHeight = (int)(1.5f * Level.tileSize);
         rightHandedCheckbox.isChecked = Options.rightHandedDPad;
+		rightHandedCheckbox.label = RIGHT_HANDED_D_PAD_STRING;
 
         dpadOpacitySlider = new Slider();
         dpadOpacitySlider.xPos = (int)(0.5f * Level.tileSize);
@@ -74,14 +75,18 @@ public class OptionsScreenState extends GameState {
         showFPSAndDeltaCheckbox = new CheckBox();
         showFPSAndDeltaCheckbox.xPos = (int)(0.5f * Level.tileSize);
         showFPSAndDeltaCheckbox.yPos = (int)(6.0f * Level.tileSize);
-        showFPSAndDeltaCheckbox.size = (int)(1.5f * Level.tileSize);
+		showFPSAndDeltaCheckbox.boundingBoxWidth = (int) (7.0f * Level.tileSize);
+        showFPSAndDeltaCheckbox.boundingBoxHeight = (int)(1.5f * Level.tileSize);
         showFPSAndDeltaCheckbox.isChecked = Options.showDebugInfo;
+		showFPSAndDeltaCheckbox.label = SHOW_DEBUG_INFO_STRING;
 
 		playMusicCheckbox = new CheckBox();
 		playMusicCheckbox.xPos = (int)(0.5f * Level.tileSize);
 		playMusicCheckbox.yPos = showFPSAndDeltaCheckbox.yPos + (int)(1.5f * Level.tileSize);
-		playMusicCheckbox.size = (int)(1.5f * Level.tileSize);
+		playMusicCheckbox.boundingBoxWidth = (int) (7.0f * Level.tileSize);
+		playMusicCheckbox.boundingBoxHeight = (int)(1.5f * Level.tileSize);
 		playMusicCheckbox.isChecked = Options.playMusic;
+		playMusicCheckbox.label = PLAY_MUSIC_STRING;
 
         rightHanded = Options.rightHandedDPad;
         dpadOpacity = Options.dpadOpacity;
@@ -107,11 +112,7 @@ public class OptionsScreenState extends GameState {
         bgSB.end();
 
         TextRenderer.renderString(OPTIONS_STRING, (int)(0.5f * Level.tileSize), 0, Level.tileSize);
-        TextRenderer.renderString(LEFT_HANDED_STRING, rightHandedCheckbox.xPos + rightHandedCheckbox.size + (int)(0.5f * Level.tileSize), rightHandedCheckbox.yPos + (int)(0.25 * Level.tileSize), TextRenderer.TEXTSCALE_SMALL);
-        TextRenderer.renderString(DPAD_STRING, rightHandedCheckbox.xPos + rightHandedCheckbox.size + (int)(0.5f * Level.tileSize) + (3 * TextRenderer.TEXTSCALE_SMALL), rightHandedCheckbox.yPos + (int)(0.75 * Level.tileSize), TextRenderer.TEXTSCALE_SMALL);
         TextRenderer.renderString(DPAD_OPACITY_STRING, dpadOpacitySlider.xPos + (int)(0.5f * TextRenderer.TEXTSCALE_MEDIUM), dpadOpacitySlider.yPos - TextRenderer.TEXTSCALE_MEDIUM, TextRenderer.TEXTSCALE_MEDIUM);
-        TextRenderer.renderString(SHOW_DEBUG_STRING, (int)(showFPSAndDeltaCheckbox.xPos + showFPSAndDeltaCheckbox.size + (int)(0.5f * Level.tileSize) + (1.5f * TextRenderer.TEXTSCALE_SMALL)), showFPSAndDeltaCheckbox.yPos + (int)(0.25 * Level.tileSize), TextRenderer.TEXTSCALE_SMALL);
-        TextRenderer.renderString(INFO_STRING, (int)(showFPSAndDeltaCheckbox.xPos + showFPSAndDeltaCheckbox.size + (int)(0.5f * Level.tileSize) + TextRenderer.TEXTSCALE_SMALL), showFPSAndDeltaCheckbox.yPos + (int)(0.75 * Level.tileSize), TextRenderer.TEXTSCALE_SMALL);
 
         rightHandedCheckbox.update();
         rightHanded = rightHandedCheckbox.isChecked;

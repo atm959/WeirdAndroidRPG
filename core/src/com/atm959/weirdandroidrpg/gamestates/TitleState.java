@@ -4,7 +4,6 @@ import com.atm959.weirdandroidrpg.audio.BGM;
 import com.atm959.weirdandroidrpg.input.Button;
 import com.atm959.weirdandroidrpg.level.Level;
 import com.atm959.weirdandroidrpg.savedata.Options;
-import com.atm959.weirdandroidrpg.text.SplashText;
 import com.atm959.weirdandroidrpg.text.TextRenderer;
 import com.atm959.weirdandroidrpg.time.Time;
 import com.atm959.weirdandroidrpg.util.Util;
@@ -35,8 +34,6 @@ public class TitleState extends GameState {
     private Texture bgTex;
     private SpriteBatch bgSB;
     float bgOffsetX = 0.0f, bgOffsetY = 0.0f;
-
-	private SplashText splashText;
 
     public TitleState(){
         BGM.playSong(BGM.SONG_TITLE);
@@ -71,8 +68,6 @@ public class TitleState extends GameState {
 
         bgTex = new Texture("title/bg.png");
         bgSB = new SpriteBatch();
-
-		splashText = new SplashText();
     }
 
     @Override
@@ -124,9 +119,6 @@ public class TitleState extends GameState {
 		float verTxtScl = TextRenderer.calculateFittingScale(VERSION_TEXT, Gdx.graphics.getWidth(), false);
 		float verTxtXPos = TextRenderer.calculateCenteredXPosition(VERSION_TEXT, verTxtScl, 0, Gdx.graphics.getWidth());
 		TextRenderer.renderString(VERSION_TEXT, verTxtXPos, Gdx.graphics.getHeight() - verTxtScl, verTxtScl);
-
-		splashText.update();
-		splashText.render();
 	}
 
     @Override
@@ -137,6 +129,5 @@ public class TitleState extends GameState {
 		sharingImageButton.dispose();
 		bgTex.dispose();
 		bgSB.dispose();
-		splashText.dispose();
     }
 }

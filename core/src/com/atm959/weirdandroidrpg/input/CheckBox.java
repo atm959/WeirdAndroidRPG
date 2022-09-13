@@ -1,5 +1,6 @@
 package com.atm959.weirdandroidrpg.input;
 
+import com.atm959.weirdandroidrpg.text.TextRenderer;
 import com.atm959.weirdandroidrpg.util.Util;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -9,8 +10,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class CheckBox {
     public int xPos, yPos;
-    public int size;
+    public int boundingBoxWidth, boundingBoxHeight;
     public boolean isChecked;
+	public String label;
 
     private Texture texture;
     private SpriteBatch sb;
@@ -18,6 +20,7 @@ public class CheckBox {
     public CheckBox(){
         texture = new Texture("ui/checkbox.png");
         sb = new SpriteBatch();
+		label = "CHECKBOX";
     }
 
     public void update(){
@@ -25,7 +28,7 @@ public class CheckBox {
             int relativeX = TouchInput.touchX - xPos;
             int relativeY = TouchInput.touchY - yPos;
 
-            if((relativeX < 0) || (relativeX > size) || (relativeY < 0) || (relativeY > size)) return;
+            if((relativeX < 0) || (relativeX > boundingBoxHeight) || (relativeY < 0) || (relativeY > boundingBoxHeight)) return;
 
             isChecked = !isChecked;
         }
@@ -38,8 +41,10 @@ public class CheckBox {
         }
 
         sb.begin();
-        sb.draw(texture, xPos, Util.convertY(yPos, size), size, size, srcX, 0, 16, 16, false, false);
+        sb.draw(texture, xPos, Util.convertY(yPos, boundingBoxHeight), boundingBoxHeight, boundingBoxHeight, srcX, 0, 16, 16, false, false);
         sb.end();
+
+		TextRenderer.renderStringFitting(label, xPos + boundingBoxHeight, yPos, boundingBoxWidth - boundingBoxHeight, boundingBoxHeight);
     }
 
     public void dispose(){

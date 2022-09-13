@@ -5,9 +5,11 @@ import com.atm959.weirdandroidrpg.input.Button;
 import com.atm959.weirdandroidrpg.input.DPad;
 import com.atm959.weirdandroidrpg.items.ItemRenderer;
 import com.atm959.weirdandroidrpg.items.items.Item;
+import com.atm959.weirdandroidrpg.items.items.NothingItem;
 import com.atm959.weirdandroidrpg.level.Level;
 import com.atm959.weirdandroidrpg.npc.NPCRenderer;
 import com.atm959.weirdandroidrpg.npc.npcs.NPC;
+import com.atm959.weirdandroidrpg.npc.npcs.NothingNPC;
 import com.atm959.weirdandroidrpg.player.Player;
 import com.atm959.weirdandroidrpg.time.Time;
 import com.atm959.weirdandroidrpg.util.Util;
@@ -39,6 +41,7 @@ public class InGameState extends GameState {
     private DPad dPad;
     private Button mapButton;
     private Button menuButton;
+	private Button optionsButton;
 
 	private boolean underwater = false;
     private float m_fboScaler = 1.5f;
@@ -92,10 +95,12 @@ public class InGameState extends GameState {
         BGM.playSong(BGM.SONG_IN_GAME);
 
         level = new Level();
+
         itemsOnGround = new Item[256];
         for(int i = 0; i < 256; i++){
             int random = new Random().nextInt(4);
-            itemsOnGround[i] = Item.ITEM_TYPES.get(random).copy();
+            //itemsOnGround[i] = Item.ITEM_TYPES.get(random).copy();
+			itemsOnGround[i] = new NothingItem();
             while(level.getTile(itemsOnGround[i].xPos, itemsOnGround[i].yPos).isSolid){
                 itemsOnGround[i].xPos = new Random().nextInt(64);
                 itemsOnGround[i].yPos = new Random().nextInt(64);
@@ -104,8 +109,9 @@ public class InGameState extends GameState {
         npcsInLevel = new NPC[256];
         for(int i = 0; i < 256; i++){
             int random = new Random().nextInt(4);
-            npcsInLevel[i] = NPC.NPC_TYPES.get(random).copy();
-            while(level.getTile(npcsInLevel[i].xPos, npcsInLevel[i].yPos).isSolid){
+            //npcsInLevel[i] = NPC.NPC_TYPES.get(random).copy();
+			npcsInLevel[i] = new NothingNPC();
+			while(level.getTile(npcsInLevel[i].xPos, npcsInLevel[i].yPos).isSolid){
                 npcsInLevel[i].xPos = new Random().nextInt(64);
                 npcsInLevel[i].yPos = new Random().nextInt(64);
             }
@@ -145,7 +151,13 @@ public class InGameState extends GameState {
         dudvMap = new Texture("level/dudvMap.png");
         dudvMap.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         dudvMap.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-    }
+
+		optionsButton = new Button("ui/optionsButton.png");
+		optionsButton.xPos = Gdx.graphics.getWidth() - (Level.tileSize * 2);
+		optionsButton.yPos = Level.tileSize * 2;
+		optionsButton.width = Level.tileSize * 2;
+		optionsButton.height = Level.tileSize * 2;
+	}
 
     @Override
     public void run(){
@@ -156,12 +168,16 @@ public class InGameState extends GameState {
 
         mapButton.update();
         menuButton.update();
+		optionsButton.update();
         if(mapButton.isPressed){
             StateManager.pushState(new ViewMapState(level, player, itemsOnGround, npcsInLevel));
         }
         if(menuButton.isPressed){
             StateManager.replaceCurrentState(new TitleState());
         }
+		if(optionsButton.isPressed){
+			StateManager.pushState(new OptionsScreenState(false));
+		}
 
 		if(underwater) {
 			m_fbo.begin();
@@ -194,6 +210,7 @@ public class InGameState extends GameState {
         dPad.render();
         mapButton.render();
         menuButton.render();
+		optionsButton.render();
 
         time += 0.00005f * Time.deltaTime;
         if(time > 1.0f) time = 0.0f;
