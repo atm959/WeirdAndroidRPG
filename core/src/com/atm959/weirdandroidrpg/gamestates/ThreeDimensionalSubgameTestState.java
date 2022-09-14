@@ -49,10 +49,10 @@ public class ThreeDimensionalSubgameTestState extends GameState {
 		cam.update();
 
 		ModelBuilder modelBuilder = new ModelBuilder();
-		model = modelBuilder.createBox(5.0f, 5.0f, 5.0f, new Material(ColorAttribute.createDiffuse(Color.GREEN)), VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates);
+		model = modelBuilder.createBox(5.0f, 5.0f, 5.0f, new Material(ColorAttribute.createDiffuse(Color.WHITE)), VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates);
 		instance = new ModelInstance(model);
 
-		tex = new Texture("ui/rainbow.png");
+		tex = new Texture("ui/smile.png");
 
 		backButton = new Button("ui/menuButton.png");
 		backButton.xPos = Gdx.graphics.getWidth() - (Level.tileSize * 2);
