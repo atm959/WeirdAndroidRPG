@@ -22,14 +22,16 @@ public class TitleState extends GameState {
     private static final String PLAY_TEXT = "PLAY";
     private static final String OPTIONS_TEXT = "OPTIONS";
     private static final String CREDITS_TEXT = "CREDITS";
-	private static final String NET_TEST_TEXT = "3D SUB-GAME TEST";
+	private static final String SUB_GAME_TEST_TEXT = "3D SUB-GAME TEST";
 	private static final String SHARING_IMAGE_TEST_TEXT = "SHARING IMAGE TEST";
+	private static final String NET_TEST_TEXT = "NET TEST";
 	private static final String VERSION_TEXT = "ALPHA 1, 1ST VERSIONED BUILD";
 
     private Button startButton;
     private Button optionsButton;
-    private Button netTestButton;
+    private Button subgameTestButton;
 	private Button sharingImageButton;
+	private Button netTestButton;
 
     private Texture bgTex;
     private SpriteBatch bgSB;
@@ -52,19 +54,26 @@ public class TitleState extends GameState {
 		optionsButton.yPos = startButton.yPos - optionsButton.height;
 		optionsButton.label = OPTIONS_TEXT;
 
-		netTestButton = new Button();
-		netTestButton.xPos = (int) (0.5f * Level.tileSize);
-		netTestButton.width = (int) (7.0f * Level.tileSize);
-		netTestButton.height = (int) (1.5f * Level.tileSize);
-		netTestButton.yPos = optionsButton.yPos - netTestButton.height;
-		netTestButton.label = NET_TEST_TEXT;
+		subgameTestButton = new Button();
+		subgameTestButton.xPos = (int) (0.5f * Level.tileSize);
+		subgameTestButton.width = (int) (7.0f * Level.tileSize);
+		subgameTestButton.height = (int) (1.5f * Level.tileSize);
+		subgameTestButton.yPos = optionsButton.yPos - subgameTestButton.height;
+		subgameTestButton.label = SUB_GAME_TEST_TEXT;
 
 		sharingImageButton = new Button();
 		sharingImageButton.xPos = (int) (0.5f * Level.tileSize);
 		sharingImageButton.width = (int) (7.0f * Level.tileSize);
 		sharingImageButton.height = (int) (1.5f * Level.tileSize);
-		sharingImageButton.yPos = netTestButton.yPos - sharingImageButton.height;
+		sharingImageButton.yPos = subgameTestButton.yPos - sharingImageButton.height;
 		sharingImageButton.label = SHARING_IMAGE_TEST_TEXT;
+
+		netTestButton = new Button();
+		netTestButton.xPos = (int) (0.5f * Level.tileSize);
+		netTestButton.width = (int) (7.0f * Level.tileSize);
+		netTestButton.height = (int) (1.5f * Level.tileSize);
+		netTestButton.yPos = sharingImageButton.yPos - netTestButton.height;
+		netTestButton.label = NET_TEST_TEXT;
 
         bgTex = new Texture("title/bg.png");
         bgSB = new SpriteBatch();
@@ -84,13 +93,17 @@ public class TitleState extends GameState {
 		if (optionsButton.isPressed) {
 			StateManager.pushState(new OptionsScreenState(false));
 		}
-		netTestButton.update();
-		if (netTestButton.isPressed) {
+		subgameTestButton.update();
+		if (subgameTestButton.isPressed) {
 			StateManager.pushState(new ThreeDimensionalSubgameTestState());
 		}
 		sharingImageButton.update();
 		if(sharingImageButton.isPressed){
 			StateManager.pushState(new SharingImageTestState());
+		}
+		netTestButton.update();
+		if(netTestButton.isPressed){
+			StateManager.pushState(new ServerConnectionTestState());
 		}
 
 		bgOffsetX += 0.4f * Time.deltaTime;
@@ -107,8 +120,9 @@ public class TitleState extends GameState {
 
 		startButton.render();
 		optionsButton.render();
-		netTestButton.render();
+		subgameTestButton.render();
 		sharingImageButton.render();
+		netTestButton.render();
 
 		//Render the text here
 		TextRenderer.renderStringFitting(WEIRD_TEXT, 0, 0, Gdx.graphics.getWidth());
@@ -125,7 +139,7 @@ public class TitleState extends GameState {
     public void dispose(){
 		startButton.dispose();
 		optionsButton.dispose();
-		netTestButton.dispose();
+		subgameTestButton.dispose();
 		sharingImageButton.dispose();
 		bgTex.dispose();
 		bgSB.dispose();
