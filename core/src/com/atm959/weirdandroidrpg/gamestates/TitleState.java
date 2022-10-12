@@ -25,6 +25,7 @@ public class TitleState extends GameState {
 	private static final String SUB_GAME_TEST_TEXT = "3D SUB-GAME TEST";
 	private static final String SHARING_IMAGE_TEST_TEXT = "SHARING IMAGE TEST";
 	private static final String NET_TEST_TEXT = "NET TEST";
+	private static final String CONTROLLER_TEST_TEXT = "CONTROLLER TEST";
 	private static final String VERSION_TEXT = "ALPHA 1, 1ST VERSIONED BUILD";
 
     private Button startButton;
@@ -32,6 +33,7 @@ public class TitleState extends GameState {
     private Button subgameTestButton;
 	private Button sharingImageButton;
 	private Button netTestButton;
+	private Button controllerTestButton;
 
     private Texture bgTex;
     private SpriteBatch bgSB;
@@ -75,6 +77,13 @@ public class TitleState extends GameState {
 		netTestButton.yPos = sharingImageButton.yPos - netTestButton.height;
 		netTestButton.label = NET_TEST_TEXT;
 
+		controllerTestButton = new Button();
+		controllerTestButton.xPos = (int) (0.5f * Level.tileSize);
+		controllerTestButton.width = (int) (7.0f * Level.tileSize);
+		controllerTestButton.height = (int) (1.5f * Level.tileSize);
+		controllerTestButton.yPos = netTestButton.yPos - controllerTestButton.height;
+		controllerTestButton.label = CONTROLLER_TEST_TEXT;
+
         bgTex = new Texture("title/bg.png");
         bgSB = new SpriteBatch();
     }
@@ -105,6 +114,10 @@ public class TitleState extends GameState {
 		if(netTestButton.isPressed){
 			StateManager.pushState(new ServerConnectionTestState());
 		}
+		controllerTestButton.update();
+		if(controllerTestButton.isPressed){
+			StateManager.pushState(new ControllerTestState());
+		}
 
 		bgOffsetX += 0.4f * Time.deltaTime;
 		bgOffsetY += 0.3f * Time.deltaTime;
@@ -123,6 +136,7 @@ public class TitleState extends GameState {
 		subgameTestButton.render();
 		sharingImageButton.render();
 		netTestButton.render();
+		controllerTestButton.render();
 
 		//Render the text here
 		TextRenderer.renderStringFitting(WEIRD_TEXT, 0, 0, Gdx.graphics.getWidth());
@@ -141,6 +155,8 @@ public class TitleState extends GameState {
 		optionsButton.dispose();
 		subgameTestButton.dispose();
 		sharingImageButton.dispose();
+		netTestButton.dispose();
+		controllerTestButton.dispose();
 		bgTex.dispose();
 		bgSB.dispose();
     }

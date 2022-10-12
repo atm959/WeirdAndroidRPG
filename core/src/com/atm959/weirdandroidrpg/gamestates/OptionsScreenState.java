@@ -30,6 +30,7 @@ public class OptionsScreenState extends GameState {
     private Button abortButton;
     private CheckBox showFPSAndDeltaCheckbox;
 	private CheckBox playMusicCheckbox;
+	private Button soundTestButton;
 
     private boolean rightHanded;
     private float dpadOpacity;
@@ -71,6 +72,13 @@ public class OptionsScreenState extends GameState {
         abortButton.height = (int) (1.5f * Level.tileSize);
         abortButton.yPos = saveButton.yPos - abortButton.height;
 		abortButton.label = ABORT_STRING;
+
+		soundTestButton = new Button();
+		soundTestButton.xPos = abortButton.xPos;
+		soundTestButton.yPos = abortButton.yPos - abortButton.height;
+		soundTestButton.width = abortButton.width;
+		soundTestButton.height = abortButton.height;
+		soundTestButton.label = "SOUND TEST";
 
         showFPSAndDeltaCheckbox = new CheckBox();
         showFPSAndDeltaCheckbox.xPos = (int)(0.5f * Level.tileSize);
@@ -144,6 +152,10 @@ public class OptionsScreenState extends GameState {
         if (abortButton.isPressed) {
             StateManager.popState();
         }
+		soundTestButton.update();
+		if(soundTestButton.isPressed){
+			StateManager.pushState(new SoundTestState());
+		}
         showFPSAndDeltaCheckbox.update();
 		showDebugInfo = showFPSAndDeltaCheckbox.isChecked;
 		playMusicCheckbox.update();
@@ -161,6 +173,7 @@ public class OptionsScreenState extends GameState {
         saveButton.label = saveString;
 		saveButton.render();
 		abortButton.render();
+		soundTestButton.render();
     }
 
     @Override
@@ -172,5 +185,6 @@ public class OptionsScreenState extends GameState {
         showFPSAndDeltaCheckbox.dispose();
         bgTex.dispose();
         bgSB.dispose();
+		soundTestButton.dispose();
     }
 }
